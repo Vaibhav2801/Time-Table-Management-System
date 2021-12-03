@@ -13,8 +13,7 @@ app.use(bodyParser.json())
 
 //sql connection
 db.connection
-//passport config
-require('./config/passport.js')(passport)
+
 
 
 app.use('/student',student)

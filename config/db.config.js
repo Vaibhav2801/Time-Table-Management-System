@@ -3,4 +3,7 @@ module.exports = {
     USER: "root",
     PASSWORD: "Vaibhav@123",
     DB: "timetable"
+    
+    
+  
   };

@@ -1,10 +1,13 @@
 const express=require('express')
-const dbConfig = require('../config/db.config.js')
 const router=express.Router()
 const sql=require('../db.js')
 const bcrypt=require('bcrypt')
 const mysql=require('mysql2')
+const jwt = require("jsonwebtoken")
 
+
+
+//Student Registration
 router.post('/register',async (req,res)=>{
     const roll_no= req.body.roll_no
     const name=req.body.name
@@ -38,26 +41,35 @@ router.post('/register',async (req,res)=>{
         })
        }
      })
-
-
-
-
-    // sql.query(
-    //     "INSERT INTO student (roll_no,stu_name,email,mobile,address,password) VALUES (?,?,?,?,?,?)",
-    //     [roll_no,name,email,mobile,address,password],(err,result)=>{
-    //         if(err){
-    //             console.log(err)
-    //         }else {
-    //             res.send("Values Inserted")
-    //         }
-    //     }
-    // )
-
-
 })
 
 
 
+//Student Login
+router.post('/login', (req, res) => {
+    sql.query(
+    `SELECT * FROM student WHERE email = ${sql.escape(req.body.email)};`,
+    (err, result) => {
+    // user does not exists
+    if (err) throw err;
+
+    if (!result.length) return res.status(401).send({ msg: 'Email or password is incorrect!'});
+    
+    // check password
+    bcrypt.compare(req.body.password,result[0]['password'],
+    (bErr, bResult) => {
+    // wrong password
+    if (bErr) throw bErr;
+    
+    if (bResult) {
+    const token = jwt.sign({email:result[0].email},'the-super-strong-secrect',{ expiresIn: '1h' });
+   // sql.query( `UPDATE  SET last_login = now() WHERE email = '${result[0].email}'`);
+    return res.status(200).send({msg: 'Logged in!',token,user: result[0]});
+    }
+    return res.status(401).send({msg: 'Username or password is incorrect!'});
+    });
+    });
+    });
 
 
 module.exports=router
