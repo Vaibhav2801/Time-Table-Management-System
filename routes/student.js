@@ -71,5 +71,25 @@ router.post('/login', (req, res) => {
     });
     });
 
+//get profile
+router.get('/profile/:id',async (req,res)=>{
+    
+    const sqlSearch = "SELECT * FROM student WHERE stu_id= ?"
+    const search_query = mysql.format(sqlSearch,[req.params.id])
+    sql.query(search_query,(err,result)=>{
+        if (err) {
+            console.log("error: ", err);
+            return  res.status(400).send({msg:err})
+          }
+          if (result.length) {
+            return  res.status(400).send({user:result[0]})
+          }
+          // not found Tutorial with the id
+          return  res.status(400).send({msg:'Not Found'})
+    })
+
+})
+
+
 
 module.exports=router

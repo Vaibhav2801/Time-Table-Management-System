@@ -1,6 +1,7 @@
 const express=require('express')
 const bodyParser=require('body-parser')
 const student=require('./routes/student')
+const teacher=require('./routes/teacher')
 const db =require('./db.js')
 const passport=require('passport')
 
@@ -17,6 +18,9 @@ db.connection
 
 
 app.use('/student',student)
+app.use('/teacher',teacher)
+
+
 app.get('/',(req,res)=>{
     res.json({message:"Welcome"})
 })
