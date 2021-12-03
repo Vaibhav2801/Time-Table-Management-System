@@ -4,11 +4,18 @@ const sql=require('../db.js')
 const bcrypt=require('bcrypt')
 const mysql=require('mysql2')
 const jwt = require("jsonwebtoken")
+const validRegInP=require('../validation/register')
+const validlogInP=require('../validation/login')
 
 
 
 //Student Registration
 router.post('/register',async (req,res)=>{
+
+    const { errors, isValid } = validRegInP(req.body);
+    if (!isValid) {
+        return res.status(400).send(errors);
+      }
 
     const name=req.body.name
     const teacher_id=req.body.teacher_id
@@ -46,6 +53,10 @@ router.post('/register',async (req,res)=>{
 
 //Student Login
 router.post('/login', (req, res) => {
+    const {errors,isValid}=validlogInP(req.body)
+    if(!isValid){
+        return res.status(400).json(errors)
+    }
     sql.query(
     `SELECT * FROM teacher WHERE email = ${sql.escape(req.body.email)};`,
     (err, result) => {
