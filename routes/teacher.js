@@ -6,7 +6,7 @@ const mysql=require('mysql2')
 const jwt = require("jsonwebtoken")
 const validRegInP=require('../validation/register')
 const validlogInP=require('../validation/login')
-const auth=require('../middleware/auth')
+const auth2=require('../middleware/auth2')
 
 
 //Student Registration
@@ -58,7 +58,7 @@ router.post('/login',(req,res)=>{
   const {errors,isValid}=validlogInP(req.body)
   if(!isValid)    return res.status(400).json(errors)
   
-   sql.query('SELECT * from student WHERE email=?',email,(err,result)=>{
+   sql.query('SELECT * from teacher WHERE email=?',email,(err,result)=>{
     if(err)    return res.status(400).send({msg:err})
    
     if(result.length===0)   return res.status(401).send({msg:'email or password is incorrect'})
@@ -67,13 +67,13 @@ router.post('/login',(req,res)=>{
                if(isMatch===false)   return res.status(401).send({msg:"email or Password is incorrect "})
    })
 
-   const token = jwt.sign({email:result[0].email},'the-super-strong-secrect',{ expiresIn: '1h' });
+   const token = jwt.sign({email:result[0].email},'jujutsu-sorcerer',{ expiresIn: '1h' });
    return res.status(200).send({msg: 'Log in!',token,user: result[0]});
 })
 })
 
 //get profile
-router.get('/profile/:id',auth, async (req,res)=>{
+router.get('/profile/:id',auth2, async (req,res)=>{
     
     const sqlSearch = "SELECT * FROM teacher WHERE teacher_id= ?"
     const search_query = mysql.format(sqlSearch,[req.params.id])

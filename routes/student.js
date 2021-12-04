@@ -6,7 +6,7 @@ const mysql=require('mysql2')
 const jwt = require("jsonwebtoken")
 const validRegInP=require('../validation/register')
 const validlogInP=require('../validation/login')
-const auth = require('../middleware/auth')
+const auth1 = require('../middleware/auth1')
 
 
 
@@ -77,7 +77,7 @@ router.post('/login',(req,res)=>{
 })
 
 //get profile
-router.get('/profile/:id',auth,async (req,res,next)=>{
+router.get('/profile/:id',auth1,async (req,res,next)=>{
     
     const sqlSearch = "SELECT * FROM student WHERE roll_no= ?"
     const search_query = mysql.format(sqlSearch,[req.params.id])

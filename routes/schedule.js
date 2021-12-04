@@ -2,9 +2,9 @@ const express=require('express')
 const router=express.Router()
 const sql=require('../db.js')
 const mysql=require('mysql2')
+const auth2=require('../middleware/auth2')
 
-
-router.post('/create',(req,res)=>{
+router.post('/create',auth2,(req,res)=>{
      const code=req.body.sub_code
      const sub=req.body.sub
      const teacher_name=req.body.teacher_name
@@ -32,7 +32,7 @@ router.post('/create',(req,res)=>{
          sql.query (insert_query, (err, result)=> {
           if (err) throw (err)
           console.log ("--------> Lecture Scheduled")
-          console.log(result.no)
+          console.log(result.num)
           res.sendStatus(201)
 
          })
@@ -77,7 +77,7 @@ router.get('/fac/:teacher_name',(req,res)=>{
 
 
 //Delete a scheduled lecture
-router.delete('/dele/:num',(req,res)=>{
+router.delete('/dele/:num',auth2,(req,res)=>{
   const sqlSearch = "DELETE FROM schedule WHERE num= ?"
   const search_query = mysql.format(sqlSearch,[req.params.num])
   sql.query(search_query,(err,result)=>{
@@ -91,9 +91,39 @@ router.delete('/dele/:num',(req,res)=>{
 })
 
 //update a lecture
-router
+router.put('/up/:num',auth2,(req,res)=>{
+  const code=req.body.sub_code
+  const sub=req.body.sub
+  const teacher_name=req.body.teacher_name
+  const branch=req.body.branch
+  const date=req.body.date
+  const start_time=req.body.start_time
+  const duration=req.body.lect_duration
+  const room_no=req.body.room_no
+  const end_time=req.body.end_time
+  const sched=req.body
+ sql.query("UPDATE schedule SET sub_code=?,sub=?,teacher_name=?,branch=?,start_time=?,lect_duration=?,room_no=?,end_time=?,date=? WHERE num=?",
+ [code,sub,teacher_name,branch,start_time,duration,room_no,end_time,date,req.params.num],
+ (err,result)=>{
+  if (err) {
+    console.log("error: ", err);
+   return    res.status(400).send({msg:err})
+  }
+  if (res.affectedRows == 0)   return   res.status(400).send({msg:'No Lecture is found'})
+    
+  sql.query('SELECT * FROM schedule WHERE num=?',req.params.num,(err,result)=>{
+    if (err) {
+      console.log("error: ", err);
+     return    res.status(400).send({msg:err})
+    }
+    if (result.length == 0)   return   res.status(400).send({msg:'No Lecture is found'})
 
-
+     return   res.send({sched:result})
+  })
+ }
+ )
+  
+})
 
 
 
