@@ -1,117 +1,64 @@
-import React, { useState } from "react";
-// import { Modal } from "react-bootstrap";
-// import { Link } from "react-router-dom";
+import React from "react";
 export default function Navbar() {
-  //   const [showModal, setShow] = useState(false);
-
-  //   const handleClose = () => setShow(false);
-  //   const handleShow = () => setShow(true);
-
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-        <h4
-          className="navbar-brand"
-          href="/"
-          //   style={{
-          //     color: "white",
-          //     fontFamily: "inherit",
-          //   }}
-        >
-          Time Table Management System
-        </h4>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon">
-            <i className="fa fa-navicon"></i>
-          </span>
-        </button>
-
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item hover-link">
-              <a className="nav-link" href="/home" style={{ color: "white" }}>
-                <i className="fa fa-fw fa-home"></i>Home
-              </a>
-            </li>
-            <li className="nav-item hover-link">
-              <a
-                className="nav-link"
-                href="/classes"
-                style={{ color: "white" }}
-              >
-                <i className="fa fa-fw fa-book"></i>Classes
-              </a>
-            </li>
-            <li className="nav-item hover-link">
-              <a
-                className="nav-link"
-                href="/profile"
-                style={{ color: "white" }}
-              >
-                <i className="fa fa-fw fa-user"></i>Profile
-              </a>
-            </li>
-            {/* <li className="nav-item hover-link">
-                <Link className="nav-link" onClick={handleShow} to="/login">
-                  <i className="fa fa-fw fa-user"></i>Login
-                </Link>
-              </li> */}
-          </ul>
+      <div className="card container">
+        <div className="card-body">
+          <h5>About TTMS</h5>
+          <section>
+            Scheduling or maintaining timetable of real-world proportions are
+            likely to have considerable complexity. In order to reduce this
+            risk, a better and reliable automatic solver without any manual
+            intervention is needed. An effective timetable in Educational
+            Management System helps educational institutions to create and
+            modify timetables seamlessly with less or no manual intervention.
+          </section>
+          <hr />
+          <h5>Advantages of TTMS</h5>
+          <div>
+            <h6>Saves Time</h6>
+            <p>
+              Creating and managing a timetable is a complex task which requires
+              a lot of time and manual paper works. The complex process of
+              timetable creation and management can be automated using an
+              effective Educational Management System with timetable module.
+            </p>
+            <h6>Less error</h6>
+            <p>
+              Paper-based manual timetable system is prone to human errors. A
+              small error in the timetable will disturb the working of the whole
+              institution. By installing an education management system with
+              timetable module, human errors can be reduced significantly.
+            </p>
+            <h6>Customization and flexibility</h6>
+            <p>
+              An effective timetable management system offers high flexibility
+              and customization. It can support any institution irrespective of
+              the size, location or language.
+            </p>
+            <h6>Secure</h6>
+            <p>
+              In Paper-based timetable systems, the data are created and store
+              in the form of paper. This is vulnerable to disasters and
+              accidents. This results in loss of data. Education Management
+              System stores the timetable data digitally; which protects the
+              data from accidents. All the data of the educational management
+              system are stored in highly effective cloud servers, which will
+              prevent the theft of digital data.
+            </p>
+            <h6>User-friendly</h6>
+            <p>
+              Anybody without technical knowledge can use this software
+              seamlessly.
+            </p>
+          </div>
         </div>
-      </nav>
-
-      {/* LOGIN MODAL
-      <Modal show={showModal} onHide={handleClose}>
-        <Modal.Header>
-          <Modal.Title>Login</Modal.Title>
-          <i
-            className="fa fa-times"
-            onClick={handleClose}
-            style={{ fontSize: "28px" }}
-          ></i>
-        </Modal.Header>
-
-        <Modal.Body>
-          <form autocomplete="off" className="container">
-            <div className="form-group">
-              <label>Username</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter Username"
-              />
-            </div>
-            <div className="form-group">
-              <label>Password</label>
-              <input
-                className="form-control"
-                type="password"
-                placeholder="Enter Password"
-                required
-              />
-              <small style={{ float: "right" }}>
-                Don't have a account yet?
-                <a href="#">
-                  <b> Register</b>
-                </a>
-              </small>
-            </div>
-
-            <br />
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-          </form>
-        </Modal.Body>
-      </Modal> */}
+      </div>
+      {/* <footer className="bg-light text-center">
+        <div className="text-center p-3">
+          <b>© 2021 Copyright, Developed by Group-9</b>
+        </div>
+      </footer> */}
     </>
   );
 }
