@@ -17,7 +17,7 @@ router.post('/register',async (req,res)=>{
         return res.status(400).send(errors);
       }
 
-    const name=req.body.name
+    x
     const teacher_id=req.body.teacher_id
     const subject=req.body.subject
     const email=req.body.email
