@@ -1,65 +1,117 @@
-import React from "react";
+import React, { useState } from "react";
+// import { Modal } from "react-bootstrap";
+// import { Link } from "react-router-dom";
+export default function Navbar() {
+  //   const [showModal, setShow] = useState(false);
 
-export default function Home() {
+  //   const handleClose = () => setShow(false);
+  //   const handleShow = () => setShow(true);
+
   return (
-    <div className="maincontainer">
-      <div className="container-fluid">
-        <div className="row no-gutter">
-          <div className="col-md-6 d-none d-md-flex bg-image"></div>
-          <div className="col-md-6 bg-light">
-            <div className="login d-flex align-items-center py-5">
-              <div className="container">
-                <div className="row">
-                  <div className="col-lg-10 col-xl-7 mx-auto">
-                    <h3 className="display-4 my-4">Welcome!</h3>
-                    <form>
-                      <div className="form-group mb-3">
-                        <input
-                          id="inputEmail"
-                          type="email"
-                          placeholder="Email address"
-                          required=""
-                          autofocus=""
-                          className="form-control rounded-pill border-0 shadow-sm px-4"
-                        />
-                      </div>
-                      <div className="form-group mb-3">
-                        <input
-                          id="inputPassword"
-                          type="password"
-                          placeholder="Password"
-                          required=""
-                          className="form-control rounded-pill border-0 shadow-sm px-4 text-dark"
-                        />
-                      </div>
-                      {/* <div className="custom-control custom-checkbox mb-3">
-                        <input
-                          id="customCheck1"
-                          type="checkbox"
-                          checked="false"
-                          className="custom-control-input"
-                        />
-                        <label for="customCheck1" className="custom-control-label">
-                          Remember password
-                        </label>
-                      </div> */}
-                      <button
-                        type="submit"
-                        className="btn btn-primary btn-block mb-2 rounded-pill shadow-sm"
-                      >
-                        Sign in
-                      </button>
-                    </form>
-                    <p>
-                      Need an account ? <a href="#signup">Sign Up</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+    <>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+        <h4
+          className="navbar-brand"
+          href="/"
+          //   style={{
+          //     color: "white",
+          //     fontFamily: "inherit",
+          //   }}
+        >
+          Time Table Management System
+        </h4>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon">
+            <i className="fa fa-navicon"></i>
+          </span>
+        </button>
+
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item hover-link">
+              <a className="nav-link" href="/home" style={{ color: "white" }}>
+                <i className="fa fa-fw fa-home"></i>Home
+              </a>
+            </li>
+            <li className="nav-item hover-link">
+              <a
+                className="nav-link"
+                href="/classes"
+                style={{ color: "white" }}
+              >
+                <i className="fa fa-fw fa-book"></i>Classes
+              </a>
+            </li>
+            <li className="nav-item hover-link">
+              <a
+                className="nav-link"
+                href="/profile"
+                style={{ color: "white" }}
+              >
+                <i className="fa fa-fw fa-user"></i>Profile
+              </a>
+            </li>
+            {/* <li className="nav-item hover-link">
+                <Link className="nav-link" onClick={handleShow} to="/login">
+                  <i className="fa fa-fw fa-user"></i>Login
+                </Link>
+              </li> */}
+          </ul>
         </div>
-      </div>
-    </div>
+      </nav>
+
+      {/* LOGIN MODAL
+      <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header>
+          <Modal.Title>Login</Modal.Title>
+          <i
+            className="fa fa-times"
+            onClick={handleClose}
+            style={{ fontSize: "28px" }}
+          ></i>
+        </Modal.Header>
+
+        <Modal.Body>
+          <form autocomplete="off" className="container">
+            <div className="form-group">
+              <label>Username</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter Username"
+              />
+            </div>
+            <div className="form-group">
+              <label>Password</label>
+              <input
+                className="form-control"
+                type="password"
+                placeholder="Enter Password"
+                required
+              />
+              <small style={{ float: "right" }}>
+                Don't have a account yet?
+                <a href="#">
+                  <b> Register</b>
+                </a>
+              </small>
+            </div>
+
+            <br />
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+          </form>
+        </Modal.Body>
+      </Modal> */}
+    </>
   );
 }
