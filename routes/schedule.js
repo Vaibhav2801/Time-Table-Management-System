@@ -90,4 +90,11 @@ router.delete('/dele/:num',(req,res)=>{
 })
 })
 
+//update a lecture
+router
+
+
+
+
+
 module.exports=router
