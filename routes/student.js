@@ -4,11 +4,18 @@ const sql=require('../db.js')
 const bcrypt=require('bcrypt')
 const mysql=require('mysql2')
 const jwt = require("jsonwebtoken")
+const validRegInP=require('../validation/register')
+const validlogInP=require('../validation/login')
 
 
 
 //Student Registration
 router.post('/register',async (req,res)=>{
+    const { errors, isValid } = validRegInP(req.body);
+    if (!isValid) {
+        return res.status(400).send(errors);
+      }
+    
     const roll_no= req.body.roll_no
     const name=req.body.name
     const email=req.body.email
@@ -17,7 +24,7 @@ router.post('/register',async (req,res)=>{
     const hashedpassword= await bcrypt.hash(req.body.password,10)
     const branch= req.body.branch
 
-    const sqlSearch = "SELECT * FROM student WHERE roll_no= ?"
+    const sqlSearch = "SELECT * FROM student WHERE roll_no= ? "
     const search_query = mysql.format(sqlSearch,[roll_no])
 
 
@@ -47,6 +54,10 @@ router.post('/register',async (req,res)=>{
 
 //Student Login
 router.post('/login', (req, res) => {
+    const {errors,isValid}=validlogInP(req.body)
+    if(!isValid){
+        return res.status(400).json(errors)
+    }
     sql.query(
     `SELECT * FROM student WHERE email = ${sql.escape(req.body.email)};`,
     (err, result) => {
@@ -74,7 +85,7 @@ router.post('/login', (req, res) => {
 //get profile
 router.get('/profile/:id',async (req,res)=>{
     
-    const sqlSearch = "SELECT * FROM student WHERE stu_id= ?"
+    const sqlSearch = "SELECT * FROM student WHERE roll_no= ?"
     const search_query = mysql.format(sqlSearch,[req.params.id])
     sql.query(search_query,(err,result)=>{
         if (err) {
