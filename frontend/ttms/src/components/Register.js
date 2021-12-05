@@ -11,8 +11,19 @@ export default function Home() {
               <div className="container">
                 <div className="row">
                   <div className="col-lg-10 col-xl-7 mx-auto">
-                    <h3 className="display-4 my-4">Welcome!</h3>
+                    <h3 className="display-4 my-4">Register</h3>
                     <form>
+                      Name
+                      <div className="form-group mb-3">
+                        <input
+                          id="inputName"
+                          type="name"
+                          placeholder="Name"
+                          required=""
+                          autofocus=""
+                          className="form-control rounded-pill border-0 shadow-sm px-4"
+                        />
+                      </div>
                       Email
                       <div className="form-group mb-3">
                         <input
@@ -67,11 +78,11 @@ export default function Home() {
                         type="submit"
                         className="btn btn-primary btn-block mt-4 mb-3 rounded-pill shadow-sm"
                       >
-                        Sign in
+                        Sign Up
                       </button>
                     </form>
-                    <p>
-                      Need an account ? <a href="#signup">Sign Up</a>
+                    <p className="need">
+                      Have an account ? <a href="#signin">Sign In</a>
                     </p>
                   </div>
                 </div>
