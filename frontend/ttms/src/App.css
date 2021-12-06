@@ -16,3 +16,14 @@
 /* footer {
   margin-top: 5px;
 } */
+table {
+  margin-top: 20px;
+}
+.btn {
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: small;
+}
+.classlist {
+  overflow-x: auto;
+}
