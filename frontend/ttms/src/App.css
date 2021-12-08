@@ -31,3 +31,13 @@ table {
 .classlist {
   overflow-x: auto;
 }
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+.profile {
+  text-align: center;
+}
+.profile button {
+  margin-top: 15px;
+}
