@@ -33,17 +33,13 @@ export default function Navbar() {
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/classes">
-                  <i className="fa fa-fw fa-book"></i>Classes
+                  <i className="fa fa-fw fa-clock-o"></i>Classes
                 </a>
               </li>
               <li className="nav-item">
-                <div
-                  className="nav-link"
-                  style={{ cursor: "pointer" }}
-                  onClick={handleShow}
-                >
+                <a className="nav-link" onClick={handleShow} href="#profile">
                   <i className="fa fa-fw fa-user"></i>Profile
-                </div>
+                </a>
               </li>
             </ul>
           </div>
