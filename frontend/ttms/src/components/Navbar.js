@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 export default function Navbar() {
   const [show, setShow] = useState(false);
 
@@ -27,19 +27,19 @@ export default function Navbar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <a className="nav-link" href="/home">
+                <Link className="nav-link" to="/home">
                   <i className="fa fa-fw fa-home"></i> Home
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/classes">
+                <Link className="nav-link" to="/classes">
                   <i className="fa fa-fw fa-clock-o"></i>Classes
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" onClick={handleShow} href="#profile">
+                <Link className="nav-link" onClick={handleShow} to="/profile">
                   <i className="fa fa-fw fa-user"></i>Profile
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
