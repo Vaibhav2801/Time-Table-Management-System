@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 export default function Home() {
   return (
     <>
@@ -42,7 +42,7 @@ export default function Home() {
                           id="flexRadioDefault1"
                         />
                         <label
-                          className="form-check-label"
+                          className="form-check-label ms-2"
                           for="flexRadioDefault1"
                         >
                           Teacher
@@ -57,21 +57,21 @@ export default function Home() {
                           checked
                         />
                         <label
-                          className="form-check-label"
+                          className="form-check-label ms-2"
                           for="flexRadioDefault2"
                         >
                           Student
                         </label>
                       </div>
-                      <button
-                        type="submit"
-                        className="btn btn-primary btn-block mt-4 mb-3 rounded-pill shadow-sm"
-                      >
-                        Sign in
-                      </button>
                     </form>
+                    <button
+                      type="submit"
+                      className="btn btn-primary btn-block mt-4 mb-3 rounded-pill shadow-sm"
+                    >
+                      Sign in
+                    </button>
                     <p>
-                      Need an account ? <a href="#signup">Sign Up</a>
+                      Need an account ? <Link to="/register">Sign Up</Link>
                     </p>
                   </div>
                 </div>

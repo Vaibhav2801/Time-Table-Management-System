@@ -41,6 +41,11 @@ export default function Navbar() {
                   <i className="fa fa-fw fa-user"></i>Profile
                 </Link>
               </li>
+              {/* <li className="nav-item">
+                <Link className="nav-link" to="/login">
+                  <i className="fa fa-fw fa-sign-in"></i>Sign In
+                </Link>
+              </li> */}
             </ul>
           </div>
         </div>

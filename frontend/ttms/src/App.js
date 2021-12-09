@@ -8,11 +8,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-      {/* <Login></Login> */}
-      {/* <Register></Register> */}
       <Router>
         <Navbar></Navbar>
         <Routes>
+          {/* <Route path="/register" element={<Register />}></Route>
+          <Route path="/login" element={<Login />}></Route> */}
           <Route path="/" element={<Home />}></Route>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/classes" element={<Classes />}></Route>
