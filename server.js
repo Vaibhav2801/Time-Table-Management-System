@@ -12,7 +12,6 @@ app.use(bodyParser.json());
 
 //sql connection
 db.connection;
-
 app.use("/student", student);
 app.use("/teacher", teacher);
 app.use("/teacher/schedule", schedule);

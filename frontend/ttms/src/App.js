@@ -2,8 +2,8 @@ import "./App.css";
 import Home from "./components/Home";
 import Classes from "./components/Classes";
 import Navbar from "./components/Navbar";
-// import Login from "./components/Login";
-// import Register from "./components/Register";
+import Login from "./components/Login";
+import Register from "./components/Register";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   return (
@@ -11,8 +11,8 @@ function App() {
       <Router>
         <Navbar></Navbar>
         <Routes>
-          {/* <Route path="/register" element={<Register />}></Route>
-          <Route path="/login" element={<Login />}></Route> */}
+          <Route path="/register" element={<Register />}></Route>
+          <Route path="/login" element={<Login />}></Route>
           <Route path="/" element={<Home />}></Route>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/classes" element={<Classes />}></Route>
