@@ -1,16 +1,16 @@
 import "./App.css";
-import Classes from "./components/Classes";
-import Navbar from "./components/Navbar";
-// import Login from "./components/Login";
+// import Classes from "./components/Classes";
+// import Navbar from "./components/Navbar";
+//  import Login from "./components/Login";
 // import Home from "./components/Home";
 // import Register from "./components/Register";
 function App() {
   return (
     <div className="App">
-      {/* <Login></Login> */}
-      <Navbar></Navbar>
+        {/* <Navbar></Navbar>
+      <Login></Login> */}
       {/* <Home></Home> */}
-      <Classes></Classes>
+      {/* <Classes></Classes> */}
       {/* <Register></Register> */}
     </div>
   );

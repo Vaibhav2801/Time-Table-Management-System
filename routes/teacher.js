@@ -10,44 +10,44 @@ const auth2=require('../middleware/auth2')
 
 
 //Student Registration
-router.post('/register',async (req,res)=>{
-     console.log(req.body)   
+// router.post('/register',async (req,res)=>{
+//      console.log(req.body)   
 
-    const { errors, isValid } = validRegInP(req.body);
-    if (!isValid)   return res.status(400).send(errors);
+//     const { errors, isValid } = validRegInP(req.body);
+//     if (!isValid)   return res.status(400).send(errors);
       
 
-    const name=req.body.name
-    const teacher_id=req.body.teacher_id
-    const subject=req.body.subject
-    const email=req.body.email
-    const mobile=req.body.mobile
-    const designation=req.body.designation
-    const hashedpassword= await bcrypt.hash(req.body.password,10)
+//     const name=req.body.name
+//     const teacher_id=req.body.teacher_id
+//     const subject=req.body.subject
+//     const email=req.body.email
+//     const mobile=req.body.mobile
+//     const designation=req.body.designation
+//     const hashedpassword= await bcrypt.hash(req.body.password,10)
 
-   const user={teacher_id,name,subject,email,hashedpassword,mobile,designation}
+//    const user={teacher_id,name,subject,email,hashedpassword,mobile,designation}
 
-    const sqlSearch = "SELECT * FROM teacher WHERE teacher_id= ?"
-    const search_query = mysql.format(sqlSearch,[teacher_id])
-    const sqlInsert = "INSERT INTO teacher (teacher_id,name,subject,email,password,mobile,designation) VALUES (?,?,?,?,?,?,?)"
-    const insert_query = mysql.format(sqlInsert,[teacher_id,name,subject,email,hashedpassword,mobile,designation])
+//     const sqlSearch = "SELECT * FROM teacher WHERE teacher_id= ?"
+//     const search_query = mysql.format(sqlSearch,[teacher_id])
+//     const sqlInsert = "INSERT INTO teacher (teacher_id,name,subject,email,password,mobile,designation) VALUES (?,?,?,?,?,?,?)"
+//     const insert_query = mysql.format(sqlInsert,[teacher_id,name,subject,email,hashedpassword,mobile,designation])
 
-     sql.query(search_query,(err,result)=>{
-      if(err)    return res.status(400).send({msg:err})
-      console.log("------> Search Results")
+//      sql.query(search_query,(err,result)=>{
+//       if(err)    return res.status(400).send({msg:err})
+//       console.log("------> Search Results")
 
-       if (result.length!==0) return res.status(409).send({msg: 'User Already Exists'});
-        else {
-        sql.query (insert_query, (err, result)=> {
-          if(err)  return res.status(400).send({msg:err})
+//        if (result.length!==0) return res.status(409).send({msg: 'User Already Exists'});
+//         else {
+//         sql.query (insert_query, (err, result)=> {
+//           if(err)  return res.status(400).send({msg:err})
 
-         console.log ("--------> Created new User")
-         console.log(result.insertId)
-         return res.status(201).send({userdata:user,msg:"successfully registered"})
-        })
-       }
-     })
-})
+//          console.log ("--------> Created new User")
+//          console.log(result.insertId)
+//          return res.status(201).send({userdata:user,msg:"successfully registered"})
+//         })
+//        }
+//      })
+// })
 
 
 

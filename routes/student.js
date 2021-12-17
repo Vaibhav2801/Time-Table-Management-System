@@ -17,23 +17,26 @@ router.post('/register',async (req,res)=>{
         return res.status(400).send(errors);
       }
     
-    const roll_no= req.body.roll_no
     const name=req.body.name
     const email=req.body.email
-    const mobile=req.body.mobile
-    const address=req.body.address
     const hashedpassword= await bcrypt.hash(req.body.password,10)
-    const branch= req.body.branch
+    const role=req.body.role
+    const subject=0
 
-    const user={roll_no,name,email,mobile,address,hashedpassword,branch}
+    const sqlSearch = "SELECT * FROM student WHERE email= ?"
+    const search_query = mysql.format(sqlSearch,[email])
 
-    const sqlSearch = "SELECT * FROM student WHERE email= ? or roll_no=? "
-    const search_query = mysql.format(sqlSearch,[email,roll_no])
-
-
-    const sqlInsert = "INSERT INTO student (stu_id,roll_no,stu_name,email,mobile,address,password,branch) VALUES (0,?,?,?,?,?,?,?)"
-    const insert_query = mysql.format(sqlInsert,[roll_no,name,email,mobile,address,hashedpassword,branch])
-
+    const sqlInsert=0,insert_query=0
+    if(role==='Student'){
+     sqlInsert = "INSERT INTO student (stu_name,email,password) VALUES (?,?,?)"
+     insert_query = mysql.format(sqlInsert,[name,email,hashedpassword])
+    }
+    else {
+      subject=req.body.user
+     sqlInsert = "INSERT INTO student (name,email,password,subject) VALUES (?,?,?,?)"
+     insert_query = mysql.format(sqlInsert,[name,email,hashedpassword,subject])
+    }
+  
      sql.query(search_query,(err,result)=>{
       if(err)    return res.status(400).send({msg:err})
         console.log("------> Search Results")
@@ -55,44 +58,45 @@ router.post('/register',async (req,res)=>{
 
 
 // Student Login
-router.post('/login',(req,res)=>{
-  const {email,password}=req.body
+// router.post('/login',(req,res)=>{
+//   const {email,password,role}=req.body
 
-  const {errors,isValid}=validlogInP(req.body)
-  if(!isValid)    return res.status(400).json(errors)
+//   const {errors,isValid}=validlogInP(req.body)
+//   if(!isValid)    return res.status(400).json(errors)
+    
   
-   sql.query('SELECT * from student WHERE email=?',email,(err,result)=>{
-    if(err)    return res.status(400).send({msg:err})
+//    sql.query('SELECT * from student WHERE email=?',email,(err,result)=>{
+//     if(err)    return res.status(400).send({msg:err})
    
-    if(result.length===0)   return res.status(401).send({msg:'email or password is incorrect'})
+//     if(result.length===0)   return res.status(401).send({msg:'email or password is incorrect'})
     
-    bcrypt.compare(password,result[0].password).then(isMatch=>{
-               if(isMatch===false)   return res.status(401).send({msg:"email or Password is incorrect "})
-   })
+//     bcrypt.compare(password,result[0].password).then(isMatch=>{
+//                if(isMatch===false)   return res.status(401).send({msg:"email or Password is incorrect "})
+//    })
 
-   const token = jwt.sign({email:result[0].email},'the-super-strong-secrect',{ expiresIn: '1h' });
-   return res.status(200).send({msg: 'Log in!',token,user: result[0]});
+//    const token = jwt.sign({email:result[0].email},'the-super-strong-secrect',{ expiresIn: '1h' });
+//    return res.status(200).send({msg: 'Log in!',token,user: result[0]});
 
-})
-})
+// })
+// })
 
-//get profile
-router.get('/profile/:id',auth1,async (req,res,next)=>{
+// //Visit profile
+// router.get('/profile/:id',auth1,async (req,res,next)=>{
     
-    const sqlSearch = "SELECT * FROM student WHERE roll_no= ?"
-    const search_query = mysql.format(sqlSearch,[req.params.id])
-    sql.query(search_query,(err,result)=>{
-        if (err) {
-            console.log("error: ", err);
-            return  res.status(400).send({msg:err})
-        }
+//     const sqlSearch = "SELECT * FROM student WHERE roll_no= ?"
+//     const search_query = mysql.format(sqlSearch,[req.params.id])
+//     sql.query(search_query,(err,result)=>{
+//         if (err) {
+//             console.log("error: ", err);
+//             return  res.status(400).send({msg:err})
+//         }
 
-          if (result.length)   return  res.status(400).send({user:result[0]})
+//           if (result.length)   return  res.status(400).send({user:result[0]})
           
-          return  res.status(400).send({msg:'Not Found'})
-    })
+//           return  res.status(400).send({msg:'Not Found'})
+//     })
 
-})
+// })
 
 
 
