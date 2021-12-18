@@ -27,10 +27,11 @@ router.post('/register',async (req,res)=>{
         const sqlSearch = "SELECT * FROM student WHERE email= ?"
         const search_query = mysql.format(sqlSearch,[email])
         const  sqlInsert = "INSERT INTO student (stu_name,email,password) VALUES (?,?,?)"
-    const insert_query = mysql.format(sqlInsert,[name,email,hashedpassword])
-     const user={name,email,hashedpassword}
+        const insert_query = mysql.format(sqlInsert,[name,email,hashedpassword])
+        const user={name,email,hashedpassword}
      sql.query(search_query,(err,result)=>{
-        if(err)    return res.status(400).send({msg:err})
+      
+    if(err)    return res.status(400).send({msg:err})
           console.log("------> Search Results")
         
           if (result.length!==0) return res.status(409).send({msg: 'User Already Exists'});

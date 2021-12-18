@@ -4,7 +4,7 @@ const sql=require('../db.js')
 const mysql=require('mysql2')
 const auth2=require('../middleware/auth2')
 
-router.post('/',(req,res)=>{
+router.post('/create',(req,res)=>{
   console.log(1)
      const sub=req.body.sub
      const teacher_name=req.body.teacher_name
@@ -54,27 +54,27 @@ router.post('/',(req,res)=>{
 // })
 // })
 
-//Get Schedule for given professor
-router.get('/fac/:teacher_name',(req,res)=>{
-    const sqlSearch = "SELECT * FROM schedule WHERE teacher_name= ?"
-    const search_query = mysql.format(sqlSearch,[req.params.teacher_name])
+//Get Schedules
+router.get('/getclasses',(req,res)=>{
+    const sqlSearch = "SELECT * FROM schedule"
+    const search_query = mysql.format(sqlSearch)
     sql.query(search_query,(err,result)=>{
         if (err) {
             console.log("error: ", err);
             return  res.status(400).send({msg:err})
           }
           if (result.length) {
-            return  res.status(400).send({lectrs:result})
+             console.log(result)
+            return  res.status(200).send(result)
           }
-          console.log(result[0].id)
          
-          return  res.status(400).send({msg:'No Lecture is found'})
+          return  res.status(200).send({msg:'No Lecture is found'})
 })
 })
 
 
 //Delete a scheduled lecture
-router.delete('/dele/:num',auth2,(req,res)=>{
+router.delete('/delete/:num',(req,res)=>{
   const sqlSearch = "DELETE FROM schedule WHERE num= ?"
   const search_query = mysql.format(sqlSearch,[req.params.num])
   sql.query(search_query,(err,result)=>{
@@ -88,7 +88,7 @@ router.delete('/dele/:num',auth2,(req,res)=>{
 })
 
 //update a lecture
-router.put('/up/:num',auth2,(req,res)=>{
+router.put('/update/:num',(req,res)=>{
   const sub=req.body.sub
   const teacher_name=req.body.teacher_name
   const date=req.body.date
@@ -102,14 +102,14 @@ router.put('/up/:num',auth2,(req,res)=>{
     console.log("error: ", err);
    return    res.status(400).send({msg:err})
   }
-  if (res.affectedRows == 0)   return   res.status(400).send({msg:'No Lecture is found'})
+  if (res.affectedRows == 0)   return   res.status(200).send({msg:'No Lecture is found'})
     
   sql.query('SELECT * FROM schedule WHERE num=?',req.params.num,(err,result)=>{
     if (err) {
       console.log("error: ", err);
      return    res.status(400).send({msg:err})
     }
-    if (result.length == 0)   return   res.status(400).send({msg:'No Lecture is found'})
+    if (result.length == 0)   return   res.status(200).send({msg:'No Lecture is found'})
 
      return   res.send({sched:result})
   })

@@ -15,7 +15,7 @@ db.connection;
 app.use("/student", student);
 app.use("/sign", sign);
 app.use("/teacher", teacher);
-app.use("/create", schedule);
+app.use("/", schedule);
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome" });
