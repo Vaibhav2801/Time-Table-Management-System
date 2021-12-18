@@ -94,22 +94,22 @@ const auth1 = require("../middleware/auth1");
 // })
 
  //Visit profile
-// router.get('/profile/:id',auth1,async (req,res)=>{
+router.get('/profile/:id',auth1,async (req,res)=>{
     
-//     const sqlSearch = "SELECT * FROM student WHERE email= ?"
-//     const search_query = mysql.format(sqlSearch,[req.params.id])
-//     sql.query(search_query,(err,result)=>{
-//         if (err) {
-//             console.log("error: ", err);
-//             return  res.status(400).send({msg:err})
-//         }
+    const sqlSearch = "SELECT * FROM student WHERE email= ?"
+    const search_query = mysql.format(sqlSearch,[req.params.id])
+    sql.query(search_query,(err,result)=>{
+        if (err) {
+            console.log("error: ", err);
+            return  res.status(400).send({msg:err})
+        }
 
-//           if (result.length)   return  res.status(400).send({user:result[0]})
+          if (result.length)   return  res.status(400).send({user:result[0]})
           
-//           return  res.status(400).send({msg:'Not Found'})
-//     })
+          return  res.status(400).send({msg:'Not Found'})
+    })
 
-// })
+})
 
 // bcrypt.compare(password, result[0].password).then((isMatch) => {
 //   if (isMatch === false)

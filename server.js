@@ -6,7 +6,6 @@ const schedule = require("./routes/schedule");
 const sign = require("./routes/sign");
 const db = require("./db.js");
 
-
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
