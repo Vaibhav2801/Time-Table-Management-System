@@ -45,7 +45,17 @@ export default function Home() {
                           className="form-control rounded-pill border-0 shadow-sm px-4 text-dark"
                         />
                       </div>
-                      <div className="form-check-inline">
+                      Role <small>(Teacher/Student)</small>
+                      <div className="form-group mb-3">
+                        <input
+                          id="inputRole"
+                          type="text"
+                          placeholder="Enter Role"
+                          required=""
+                          className="form-control rounded-pill border-0 shadow-sm px-4 text-dark"
+                        />
+                      </div>
+                      {/* <div className="form-check-inline">
                         <input
                           className="form-check-input mt-1"
                           type="radio"
@@ -73,11 +83,11 @@ export default function Home() {
                         >
                           Student
                         </label>
-                      </div>
+                      </div> */}
                     </form>
                     <button
                       type="submit"
-                      className="btn btn-primary btn-block mt-4 mb-3 rounded-pill shadow-sm"
+                      className="btn btn-primary btn-block mt-2 mb-3 rounded-pill shadow-sm"
                     >
                       Sign Up
                     </button>

@@ -52,30 +52,30 @@ const auth2=require('../middleware/auth2')
 
 
 //Teacher Login
-router.post('/login',(req,res)=>{
-  const {email,password}=req.body
+// router.post('/login',(req,res)=>{
+//   const {email,password}=req.body
 
-  const {errors,isValid}=validlogInP(req.body)
-  if(!isValid)    return res.status(400).json(errors)
+//   const {errors,isValid}=validlogInP(req.body)
+//   if(!isValid)    return res.status(400).json(errors)
   
-   sql.query('SELECT * from teacher WHERE email=?',email,(err,result)=>{
-    if(err)    return res.status(400).send({msg:err})
+//    sql.query('SELECT * from teacher WHERE email=?',email,(err,result)=>{
+//     if(err)    return res.status(400).send({msg:err})
    
-    if(result.length===0)   return res.status(401).send({msg:'email or password is incorrect'})
+//     if(result.length===0)   return res.status(401).send({msg:'email or password is incorrect'})
     
-    bcrypt.compare(password,result[0].password).then(isMatch=>{
-               if(isMatch===false)   return res.status(401).send({msg:"email or Password is incorrect "})
-   })
+//     bcrypt.compare(password,result[0].password).then(isMatch=>{
+//                if(isMatch===false)   return res.status(401).send({msg:"email or Password is incorrect "})
+//    })
 
-   const token = jwt.sign({email:result[0].email},'jujutsu-sorcerer',{ expiresIn: '1h' });
-   return res.status(200).send({msg: 'Log in!',token,user: result[0]});
-})
-})
+//    const token = jwt.sign({email:result[0].email},'jujutsu-sorcerer',{ expiresIn: '1h' });
+//    return res.status(200).send({msg: 'Log in!',token,user: result[0]});
+// })
+// })
 
 //get profile
 router.get('/profile/:id',auth2, async (req,res)=>{
     
-    const sqlSearch = "SELECT * FROM teacher WHERE teacher_id= ?"
+    const sqlSearch = "SELECT * FROM teacher WHERE email= ?"
     const search_query = mysql.format(sqlSearch,[req.params.id])
     sql.query(search_query,(err,result)=>{
         if (err) {

@@ -5,20 +5,16 @@ const mysql=require('mysql2')
 const auth2=require('../middleware/auth2')
 
 router.post('/create',auth2,(req,res)=>{
-     const code=req.body.sub_code
      const sub=req.body.sub
      const teacher_name=req.body.teacher_name
-     const branch=req.body.branch
      const date=req.body.date
      const start_time=req.body.start_time
-     const duration=req.body.lect_duration
-     const room_no=req.body.room_no
      const end_time=req.body.end_time
 
      const sqlSearch = "SELECT * FROM schedule WHERE (start_time<= ? and end_time>? ) or (start_time< ? and end_time>=?)"
      const search_query = mysql.format(sqlSearch,[start_time,start_time,end_time,end_time])
-     const sqlInsert = "INSERT INTO schedule (sub_code,sub,teacher_name,branch,start_time,lect_duration,room_no,end_time,date) VALUES (?,?,?,?,?,?,?,?,?)"
-     const insert_query = mysql.format(sqlInsert,[code,sub,teacher_name,branch,start_time,duration,room_no,end_time,date])
+     const sqlInsert = "INSERT INTO schedule (sub,teacher_name,start_time,end_time,date) VALUES (?,?,?,?,?)"
+     const insert_query = mysql.format(sqlInsert,[sub,teacher_name,start_time,end_time,date])
  
       sql.query(search_query,(err,result)=>{
          if (err) throw (err)
@@ -40,22 +36,22 @@ router.post('/create',auth2,(req,res)=>{
       })
 })
 
-//Get Schedule of given branch
-router.get('/:branch',(req,res)=>{
-    const sqlSearch = "SELECT * FROM schedule WHERE branch= ?"
-    const search_query = mysql.format(sqlSearch,[req.params.branch])
-    sql.query(search_query,(err,result)=>{
-        if (err) {
-            console.log("error: ", err);
-            return  res.status(400).send({msg:err})
-          }
-          if (result.length) {
-            return  res.status(400).send({lectures:result})
-          }
+ //Get Schedule of given branch
+// router.get('/:branch',(req,res)=>{
+//     const sqlSearch = "SELECT * FROM schedule WHERE branch= ?"
+//     const search_query = mysql.format(sqlSearch,[req.params.branch])
+//     sql.query(search_query,(err,result)=>{
+//         if (err) {
+//             console.log("error: ", err);
+//             return  res.status(400).send({msg:err})
+//           }
+//           if (result.length) {
+//             return  res.status(400).send({lectures:result})
+//           }
           
-          return  res.status(400).send({msg:'No Lecture is Scheduled'})
-})
-})
+//           return  res.status(400).send({msg:'No Lecture is Scheduled'})
+// })
+// })
 
 //Get Schedule for given professor
 router.get('/fac/:teacher_name',(req,res)=>{
@@ -92,18 +88,14 @@ router.delete('/dele/:num',auth2,(req,res)=>{
 
 //update a lecture
 router.put('/up/:num',auth2,(req,res)=>{
-  const code=req.body.sub_code
   const sub=req.body.sub
   const teacher_name=req.body.teacher_name
-  const branch=req.body.branch
   const date=req.body.date
   const start_time=req.body.start_time
-  const duration=req.body.lect_duration
-  const room_no=req.body.room_no
   const end_time=req.body.end_time
   const sched=req.body
- sql.query("UPDATE schedule SET sub_code=?,sub=?,teacher_name=?,branch=?,start_time=?,lect_duration=?,room_no=?,end_time=?,date=? WHERE num=?",
- [code,sub,teacher_name,branch,start_time,duration,room_no,end_time,date,req.params.num],
+ sql.query("UPDATE schedule SET sub=?,teacher_name=?,start_time=?,end_time=?,date=? WHERE num=?",
+ [sub,teacher_name,start_time,end_time,date,req.params.num],
  (err,result)=>{
   if (err) {
     console.log("error: ", err);
