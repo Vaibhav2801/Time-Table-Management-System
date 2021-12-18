@@ -4,7 +4,7 @@ const sql=require('../db.js')
 const mysql=require('mysql2')
 const auth2=require('../middleware/auth2')
 
-router.post('/',(req,res)=>{
+router.post('/create',(req,res)=>{
   console.log(1)
      const sub=req.body.sub
      const teacher_name=req.body.teacher_name
@@ -54,17 +54,18 @@ router.post('/',(req,res)=>{
 // })
 // })
 
-//Get Schedule for given professor
-router.get('/fac/:teacher_name',(req,res)=>{
-    const sqlSearch = "SELECT * FROM schedule WHERE teacher_name= ?"
-    const search_query = mysql.format(sqlSearch,[req.params.teacher_name])
+//Get Schedules
+router.get('/getclasses',(req,res)=>{
+  console.log(1)
+    const sqlSearch = "SELECT * FROM schedule"
+    const search_query = mysql.format(sqlSearch)
     sql.query(search_query,(err,result)=>{
         if (err) {
             console.log("error: ", err);
             return  res.status(400).send({msg:err})
           }
           if (result.length) {
-            return  res.status(400).send({lectrs:result})
+            return  res.status(400).send({lectures:result})
           }
           console.log(result[0].id)
          
@@ -74,7 +75,7 @@ router.get('/fac/:teacher_name',(req,res)=>{
 
 
 //Delete a scheduled lecture
-router.delete('/dele/:num',auth2,(req,res)=>{
+router.delete('/delete/:num',auth2,(req,res)=>{
   const sqlSearch = "DELETE FROM schedule WHERE num= ?"
   const search_query = mysql.format(sqlSearch,[req.params.num])
   sql.query(search_query,(err,result)=>{
@@ -88,7 +89,7 @@ router.delete('/dele/:num',auth2,(req,res)=>{
 })
 
 //update a lecture
-router.put('/up/:num',auth2,(req,res)=>{
+router.put('/update/:num',auth2,(req,res)=>{
   const sub=req.body.sub
   const teacher_name=req.body.teacher_name
   const date=req.body.date
