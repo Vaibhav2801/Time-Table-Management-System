@@ -103,7 +103,7 @@ export default function ScheduleClass() {
                 />
               </div>
               <div className="form-group">
-                <label>Subject</label>
+                <label>Start Time</label>
                 <input
                   type="text"
                   className="form-control"
@@ -114,7 +114,7 @@ export default function ScheduleClass() {
                 />
               </div>
               <div className="form-group">
-                <label>Subject</label>
+                <label>End Time</label>
                 <input
                   type="text"
                   className="form-control"
