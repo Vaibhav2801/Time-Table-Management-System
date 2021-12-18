@@ -2,6 +2,7 @@ import "./App.css";
 import Home from "./components/Home";
 import Classes from "./components/Classes";
 import Navbar from "./components/Navbar";
+import ScheduleClass from "./components/ScheduleClass";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -17,6 +18,7 @@ function App() {
           <Route path="/home" element={<Home />}></Route>
           <Route path="/classes" element={<Classes />}></Route>
           <Route path="/profile" element={<Home />}></Route>
+          <Route path="/schedule" element={<ScheduleClass />}></Route>
         </Routes>
       </Router>
     </div>
