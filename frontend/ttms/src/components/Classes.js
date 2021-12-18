@@ -51,7 +51,7 @@ export default function Classes() {
       alert("Please fill  all the details");
     } else {
       axios
-        .put("/up/:num", {
+        .put("/up/" + num, {
           Date: date,
           Subject: subject,
           Teacher: teacher,
@@ -89,7 +89,7 @@ export default function Classes() {
 
   const handleDelete = (num) => {
     axios
-      .delete("/dele/:num")
+      .delete("/dele/" + num)
       .then((res) => {
         console.log(res);
         alert("Cancel this Class ?");
