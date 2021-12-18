@@ -15,11 +15,11 @@ db.connection;
 app.use("/student", student);
 app.use("/sign", sign);
 app.use("/teacher", teacher);
-app.use("/teacher/schedule", schedule);
+app.use("/create", schedule);
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome" });
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 app.listen(port, () => console.log("Server is up on port " + port));

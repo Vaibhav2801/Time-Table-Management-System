@@ -37,11 +37,11 @@ export default function ScheduleClass() {
     } else {
       axios
         .post("/create", {
-          Date: date,
-          Subject: subject,
-          Teacher: teacher,
-          StartTime: starttime,
-          EndTime: endtime,
+          date: date,
+          sub: subject,
+          teacher_name: teacher,
+          start_time: starttime,
+          end_time: endtime,
         })
         .then((res) => {
           alert("Class Scheduled");
@@ -72,7 +72,7 @@ export default function ScheduleClass() {
               <div className="form-group">
                 <label>Date (dd/mm/yyyy)</label>
                 <input
-                  type="text"
+                  type="date"
                   className="form-control"
                   id="adddate"
                   placeholder="Enter Date"
@@ -103,9 +103,9 @@ export default function ScheduleClass() {
                 />
               </div>
               <div className="form-group">
-                <label>Subject</label>
+                <label>Start Time</label>
                 <input
-                  type="text"
+                  type="time"
                   className="form-control"
                   id="addstarttime"
                   placeholder="Start Time"
@@ -114,9 +114,9 @@ export default function ScheduleClass() {
                 />
               </div>
               <div className="form-group">
-                <label>Subject</label>
+                <label>End Time</label>
                 <input
-                  type="text"
+                  type="time"
                   className="form-control"
                   id="addendtime"
                   placeholder="End Time"

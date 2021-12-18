@@ -4,7 +4,8 @@ const sql=require('../db.js')
 const mysql=require('mysql2')
 const auth2=require('../middleware/auth2')
 
-router.post('/create',auth2,(req,res)=>{
+router.post('/',(req,res)=>{
+  console.log(1)
      const sub=req.body.sub
      const teacher_name=req.body.teacher_name
      const date=req.body.date
