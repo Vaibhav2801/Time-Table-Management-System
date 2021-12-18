@@ -13,7 +13,6 @@ app.use(bodyParser.json());
 
 //sql connection
 db.connection;
-
 app.use("/student", student);
 app.use("/sign", sign);
 app.use("/teacher", teacher);

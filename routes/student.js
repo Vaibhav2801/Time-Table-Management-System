@@ -1,14 +1,12 @@
-const express=require('express')
-const router=express.Router()
-const sql=require('../db.js')
-const bcrypt=require('bcrypt')
-const mysql=require('mysql2')
-const jwt = require("jsonwebtoken")
-const validRegInP=require('../validation/register')
-const validlogInP=require('../validation/login')
-const auth1 = require('../middleware/auth1')
-
-
+const express = require("express");
+const router = express.Router();
+const sql = require("../db.js");
+const bcrypt = require("bcrypt");
+const mysql = require("mysql2");
+const jwt = require("jsonwebtoken");
+const validRegInP = require("../validation/register");
+const validlogInP = require("../validation/login");
+const auth1 = require("../middleware/auth1");
 
 //Student Registration
 // router.post('/register',async (req,res)=>{
@@ -68,9 +66,9 @@ const auth1 = require('../middleware/auth1')
 //   if(role===string1){
 //    sql.query('SELECT * from student WHERE email=?',email,(err,result)=>{
 //     if(err)    return res.status(400).send({msg:err})
-   
+
 //     if(result.length===0)   return res.status(401).send({msg:'email or password is incorrect'})
-    
+
 //     bcrypt.compare(password,result[0].password).then(isMatch=>{
 //                if(isMatch===false)   return res.status(401).send({msg:"email or Password is incorrect "})
 //    })
@@ -113,6 +111,30 @@ router.get('/profile/:id',auth1,async (req,res,next)=>{
 
 })
 
+// bcrypt.compare(password, result[0].password).then((isMatch) => {
+//   if (isMatch === false)
+//     return res.status(401).send({ msg: "email or Password is incorrect " });
+// });
 
+// const token = jwt.sign({ email: result[0].email }, "the-super-strong-secrect", {
+//   expiresIn: "1h",
+// });
+// return res.status(200).send({ msg: "Log in!", token, user: result[0] });
 
-module.exports=router
+// //get profile
+// router.get("/profile/:id", auth1, async (req, res, next) => {
+//   const sqlSearch = "SELECT * FROM student WHERE roll_no= ?";
+//   const search_query = mysql.format(sqlSearch, [req.params.id]);
+//   sql.query(search_query, (err, result) => {
+//     if (err) {
+//       console.log("error: ", err);
+//       return res.status(400).send({ msg: err });
+//     }
+
+//     if (result.length) return res.status(400).send({ user: result[0] });
+
+//     return res.status(400).send({ msg: "Not Found" });
+//   });
+// });
+
+module.exports = router;
