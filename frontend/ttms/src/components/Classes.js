@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import moment from "moment";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
 
@@ -14,11 +15,11 @@ export default function Classes() {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = (singleclass) => {
-    setNum(singleclass._num);
-    setSubject(singleclass.Subject);
-    setTeacher(singleclass.Teacher);
-    setStartTime(singleclass.StartTime);
-    setEndTime(singleclass.EndTime);
+    setNum(singleclass.num);
+    setSubject(singleclass.sub);
+    setTeacher(singleclass.teacher_name);
+    setStartTime(singleclass.start_time);
+    setEndTime(singleclass.end_time);
     setIsOpen(true);
   };
   const closeModal = () => setIsOpen(false);
@@ -51,12 +52,12 @@ export default function Classes() {
       alert("Please fill  all the details");
     } else {
       axios
-        .put("/up/:num", {
-          Date: date,
-          Subject: subject,
-          Teacher: teacher,
-          StartTime: starttime,
-          EndTime: endtime,
+        .put("/update/"+ num, {
+          date: date,
+         sub: subject,
+          teacher_name: teacher,
+          start_time: starttime,
+          end_time: endtime,
         })
         .then((res) => {
           alert("Class Rescheduled");
@@ -65,6 +66,8 @@ export default function Classes() {
           setSubject("");
           setStartTime("");
           setEndTime("");
+          setIsOpen(false);
+          getclasses();
         })
         .catch((err) => {
           console.log(err);
@@ -80,6 +83,7 @@ export default function Classes() {
     axios
       .get("/getclasses")
       .then((res) => {
+        console.log(res.data);
         setClasslist(res.data);
       })
       .catch((err) => {
@@ -89,7 +93,7 @@ export default function Classes() {
 
   const handleDelete = (num) => {
     axios
-      .delete("/dele/:num")
+      .delete("/delete/" + num)
       .then((res) => {
         console.log(res);
         alert("Cancel this Class ?");
@@ -98,6 +102,7 @@ export default function Classes() {
       .catch((err) => {
         console.log(err);
       });
+      getclasses();
   };
 
   return (
@@ -126,15 +131,15 @@ export default function Classes() {
                 <tbody>
                   {classlist.map((singleclass) => (
                     <tr>
-                      <td>{singleclass.date}</td>
-                      <td>{singleclass.subject}</td>
-                      <td>{singleclass.teacher}</td>
-                      <td>{singleclass.starttime}</td>
-                      <td>{singleclass.endtime}</td>
+                      <td>{moment(singleclass.date).format("YYYY-MM-DD")}</td>
+                      <td>{singleclass.sub}</td>
+                      <td>{singleclass.teacher_name}</td>
+                      <td>{singleclass.start_time}</td>
+                      <td>{singleclass.end_time}</td>
                       <td>
                         <button
                           className="btn btn-danger"
-                          onClick={() => handleDelete(singleclass._num)}
+                          onClick={() => handleDelete(singleclass.num)}
                         >
                           Cancel
                         </button>
@@ -169,7 +174,7 @@ export default function Classes() {
             <div className="form-group">
               <label>Date (dd/mm/yyyy)</label>
               <input
-                type="text"
+                type="date"
                 className="form-control"
                 id="adddate"
                 placeholder="Enter Date"
@@ -202,7 +207,7 @@ export default function Classes() {
             <div className="form-group">
               <label>Start Time</label>
               <input
-                type="text"
+                type="time"
                 className="form-control"
                 id="addstarttime"
                 placeholder="Start Time"
@@ -213,7 +218,7 @@ export default function Classes() {
             <div className="form-group">
               <label>End Time</label>
               <input
-                type="text"
+                type="time"
                 className="form-control"
                 id="addendtime"
                 placeholder="End Time"
