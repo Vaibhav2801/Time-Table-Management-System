@@ -6,7 +6,6 @@ const schedule = require("./routes/schedule");
 const sign = require("./routes/sign");
 const db = require("./db.js");
 
-
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -22,5 +21,5 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome" });
 });
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => console.log("Server is up on port " + port));
