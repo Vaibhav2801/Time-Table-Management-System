@@ -94,7 +94,7 @@ const auth1 = require("../middleware/auth1");
 // })
 
  //Visit profile
-router.get('/profile/:id',auth1,async (req,res,next)=>{
+router.get('/profile/:id',auth1,async (req,res)=>{
     
     const sqlSearch = "SELECT * FROM student WHERE email= ?"
     const search_query = mysql.format(sqlSearch,[req.params.id])
