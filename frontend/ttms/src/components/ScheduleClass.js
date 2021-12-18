@@ -65,7 +65,7 @@ export default function ScheduleClass() {
           </div>
           <div className="card-body">
             <form
-              autocomplete="off"
+             // autocomplete="off"
               onSubmit={onSubmitForm}
               className="container"
             >
