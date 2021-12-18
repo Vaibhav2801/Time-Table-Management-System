@@ -25,7 +25,7 @@ router.post('/create',auth2,(req,res)=>{
          console.log("------> Search Results")
          console.log(result.length)
          if (result.length != 0) {
-          console.log("Lecture is already scheduled at thet time")
+          console.log("Lecture is already scheduled at that time")
           res.status(404).send({msg:'Lecture is already scheduled at that time'}) 
          } 
          else {
