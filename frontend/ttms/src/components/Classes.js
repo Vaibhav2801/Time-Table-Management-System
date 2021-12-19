@@ -134,13 +134,13 @@ export default function Classes() {
                         <td>{singleclass.end_time}</td>
                         <td>
                           <button
-                            className="btn btn-danger"
+                            className="btn btn-sm btn-danger ms-2"
                             onClick={() => handleDelete(singleclass.num)}
                           >
                             Cancel
                           </button>
                           <button
-                            className="btn btn-success"
+                            className="btn btn-sm btn-success ms-2"
                             onClick={() => openModal(singleclass)}
                           >
                             Update
@@ -156,81 +156,91 @@ export default function Classes() {
         </div>
       </div>
       {/* modal for update class */}
-      <Modal show={isOpen} onHide={closeModal} className="ml-auto">
-        <Modal.Header>
-          <Modal.Title>Reschedule Class</Modal.Title>
-          <i
-            className="fa fa-times"
-            onClick={closeModal}
-            style={{ fontSize: "28px" }}
-          ></i>
+      <Modal show={isOpen} onHide={closeModal}>
+        <Modal.Header style={{ backgroundColor: "#cc5500" }}>
+          <h5 style={{ color: "white" }}>Reschedule Class</h5>
         </Modal.Header>
         <Modal.Body>
-          <form onSubmit={onUpdateForm} className="container">
-            <div className="form-group">
-              <label>Date</label>
-              <input
-                type="date"
-                className="form-control"
-                id="adddate"
-                placeholder="Enter Date"
-                value={date}
-                onChange={onChangeDate}
-              />
-            </div>
-            <div className="form-group">
-              <label>Teacher</label>
-              <input
-                type="text"
-                className="form-control"
-                id="addteacher"
-                placeholder="Enter Teacher's Name"
-                value={teacher}
-                onChange={onChangeTeacher}
-              />
-            </div>
-            <div className="form-group">
-              <label>Subject</label>
-              <input
-                type="text"
-                className="form-control"
-                id="addsubject"
-                placeholder="Enter Subject"
-                value={subject}
-                onChange={onChangeSubject}
-              />
-            </div>
-            <div className="form-group">
-              <label>Start Time</label>
-              <input
-                type="time"
-                className="form-control"
-                id="addstarttime"
-                placeholder="Start Time"
-                value={starttime}
-                onChange={onChangeStartTime}
-              />
-            </div>
-            <div className="form-group">
-              <label>End Time</label>
-              <input
-                type="time"
-                className="form-control"
-                id="addendtime"
-                placeholder="End Time"
-                value={endtime}
-                onChange={onChangeEndTime}
-              />
-            </div>
-            <br />
-            <button
-              type="submit"
-              className="btn btn-primary"
-              style={{ float: "right" }}
-            >
-              Submit
-            </button>
-          </form>
+          <div className="updateform">
+            <form onSubmit={onUpdateForm} className="container">
+              <div className="form-group">
+                <label>Date</label>
+                <input
+                  type="date"
+                  className="form-control"
+                  id="adddate"
+                  placeholder="Enter Date"
+                  value={date}
+                  onChange={onChangeDate}
+                />
+              </div>
+              <div className="form-group">
+                <label>Teacher</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="addteacher"
+                  placeholder="Enter Teacher's Name"
+                  value={teacher}
+                  onChange={onChangeTeacher}
+                />
+              </div>
+              <div className="form-group">
+                <label>Subject</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="addsubject"
+                  placeholder="Enter Subject's Name"
+                  value={subject}
+                  onChange={onChangeSubject}
+                />
+              </div>
+              <div className="row">
+                <div className="col">
+                  {" "}
+                  <div className="form-group">
+                    <label>Start Time</label>
+                    <input
+                      type="time"
+                      className="form-control"
+                      id="addstarttime"
+                      placeholder="Start Time"
+                      value={starttime}
+                      onChange={onChangeStartTime}
+                    />
+                  </div>
+                </div>
+                <div className="col">
+                  <div className="form-group">
+                    <label>End Time</label>
+                    <input
+                      type="time"
+                      className="form-control"
+                      id="addendtime"
+                      placeholder="End Time"
+                      value={endtime}
+                      onChange={onChangeEndTime}
+                    />
+                  </div>
+                </div>
+              </div>
+              <button
+                type="submit"
+                className="btn btn-sm btn-secondary"
+                onClick={closeModal}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="btn btn-sm btn-primary"
+                style={{ float: "right" }}
+              >
+                Submit
+              </button>
+            </form>
+          </div>
         </Modal.Body>
       </Modal>
     </>
