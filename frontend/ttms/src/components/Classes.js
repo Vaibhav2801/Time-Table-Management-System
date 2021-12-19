@@ -83,7 +83,7 @@ export default function Classes() {
     axios
       .get("/getclasses")
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setClasslist(res.data);
       })
       .catch((err) => {
@@ -102,58 +102,60 @@ export default function Classes() {
       .catch((err) => {
         console.log(err);
       });
-    getclasses();
   };
 
   return (
     <>
       <div className="card container">
         <div className="card-body">
-          <h5>List of Classes</h5>
           {classlist.length === 0 ? (
             <p>Currently no classes are scheduled!</p>
           ) : (
-            <div
-              className="classlist container-fluid"
-              style={{ overflow: "auto", height: "500px" }}
-            >
-              <table className="table table-striped">
-                <thead className="thead-dark">
-                  <tr>
-                    <th scope="col">Date</th>
-                    <th scope="col">Subject</th>
-                    <th scope="col">Teacher</th>
-                    <th scope="col">Starts at</th>
-                    <th scope="col">Ends at</th>
-                    <th scope="col">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {classlist.map((singleclass) => (
+            <div className="classlist">
+              <h5>List of Classes</h5>
+              <div
+                className="container-fluid"
+                style={{ overflow: "auto", height: "500px" }}
+              >
+                <table className="table table-striped">
+                  <thead className="thead-dark">
                     <tr>
-                      <td>{moment(singleclass.date).format("YYYY-MM-DD")}</td>
-                      <td>{singleclass.sub}</td>
-                      <td>{singleclass.teacher_name}</td>
-                      <td>{singleclass.start_time}</td>
-                      <td>{singleclass.end_time}</td>
-                      <td>
-                        <button
-                          className="btn btn-danger"
-                          onClick={() => handleDelete(singleclass.num)}
-                        >
-                          Cancel
-                        </button>
-                        <button
-                          className="btn btn-success"
-                          onClick={() => openModal(singleclass)}
-                        >
-                          Update
-                        </button>
-                      </td>
+                      <th scope="col">Date</th>
+                      <th scope="col">Subject</th>
+                      <th scope="col">Teacher</th>
+                      <th scope="col">Starts at</th>
+                      <th scope="col">Ends at</th>
+                      <th scope="col">Actions</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {classlist.map((singleclass) => (
+                      <tr>
+                        <td>{moment(singleclass.date).format("YYYY-MM-DD")}</td>
+                        <td>{singleclass.sub}</td>
+                        <td>{singleclass.teacher_name}</td>
+                        <td>{singleclass.start_time}</td>
+                        <td>{singleclass.end_time}</td>
+                        <td>
+                          <button
+                            className="btn btn-danger"
+                            onClick={() => handleDelete(singleclass.num)}
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            className="btn btn-success"
+                            onClick={() => openModal(singleclass)}
+                          >
+                            Update
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                    )
+                  </tbody>
+                </table>
+              </div>
             </div>
           )}
         </div>

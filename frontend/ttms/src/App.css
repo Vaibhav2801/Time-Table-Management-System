@@ -2,24 +2,22 @@
 .image {
   min-height: 100vh;
 }
-.bg-image {
-  background-image: url("ttmsback.png");
-  background-size: cover;
-  background-position: left;
-}
 .card {
   margin-top: 25px;
+  background-color: white;
 }
-.card-body h5 {
+.card-body h4,
+h5 {
   text-align: center;
+  color: #1266f1;
+}
+.home p {
+  color: #cc5500;
 }
 nav ul a:hover {
   color: #fff !important;
   zoom: 1.03;
 }
-/* footer {
-  margin-top: 5px;
-} */
 table {
   margin-top: 20px;
 }
