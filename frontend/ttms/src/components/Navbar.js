@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import usericon from "../images/usericon.png";
 export default function Navbar() {
   const [show, setShow] = useState(false);
 
@@ -52,39 +53,42 @@ export default function Navbar() {
       </nav>
       {/* profile modal */}
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Profile</Modal.Title>
+        <Modal.Header style={{ backgroundColor: "#cc5500" }}>
+          <h5 style={{ color: "white" }}>Profile</h5>
         </Modal.Header>
         <Modal.Body>
           <div className="profile">
-            <div className="center">
-              <div className="row">
-                <p>
-                  <b>Name : </b>Abhijeet Mishra
-                </p>
-              </div>
-              <div className="row">
-                <p>
-                  <b>Email : </b>abc@abc.com
-                </p>
-              </div>
-              <div className="row">
-                <p>
-                  <b>Contact : </b>+91 8833456783
-                </p>
-              </div>
-              <div className="row">
-                <p>
-                  <b>Role : </b>Student
-                </p>
-              </div>
+            <div className="user">
+              <img src={usericon} alt="user"></img>
+            </div>
+            <div className="text-center">
+              <p>
+                <b>Name : </b>XYZ
+              </p>
+              <p>
+                <b>Email: </b>xyz@xyz.com
+              </p>
+              <p>
+                <b>Branch: </b>Information Technology
+              </p>
+              <p>
+                <b>Designation:</b> Teacher
+              </p>
             </div>
             <button
               type="button"
-              className="btn btn-danger"
+              className="btn btn-sm btn-danger"
+              style={{ float: "right" }}
               onClick={handleClose}
             >
               Logout
+            </button>
+            <button
+              type="button"
+              className="btn btn-sm btn-secondary"
+              onClick={handleClose}
+            >
+              Cancel
             </button>
           </div>
         </Modal.Body>

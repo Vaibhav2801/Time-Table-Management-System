@@ -25,15 +25,15 @@ table {
   border-radius: 16px;
   cursor: pointer;
 }
-.center {
-  margin-left: auto;
-  margin-right: auto;
-}
-.profile {
-  text-align: center;
-}
 .profile button {
   margin-top: 15px;
+}
+.profile .user img {
+  height: 25%;
+  width: 25%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 .schedule .card {
   height: 100%;
@@ -72,4 +72,7 @@ table {
 .classes .card-header h4 {
   text-align: center;
   color: white;
+}
+.updateform button {
+  margin-top: 15px;
 }
