@@ -44,7 +44,7 @@ export default function Classes() {
       starttime === "" ||
       endtime === ""
     ) {
-      alert("Please fill  all the details");
+      alert("Please fill all the details");
     } else {
       axios
         .put("/update/" + num, {
@@ -78,7 +78,6 @@ export default function Classes() {
       .then((res) => {
         console.log(res.data);
         setClasslist(res.data);
-        setClasslist(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -99,59 +98,65 @@ export default function Classes() {
   };
   return (
     <>
-      <div className="card container">
-        <div className="card-body">
-          <h5>List of Classes</h5>
-          {classlist.length === 0 ? (
-            <p>Currently no classes are scheduled!</p>
-          ) : (
-            <div
-              className="classlist container-fluid"
-              style={{ overflow: "auto", height: "500px" }}
-            >
-              <table className="table table-striped">
-                <thead className="thead-dark">
-                  <tr>
-                    <th scope="col">Date</th>
-                    <th scope="col">Subject</th>
-                    <th scope="col">Teacher</th>
-                    <th scope="col">Starts at</th>
-                    <th scope="col">Ends at</th>
-                    <th scope="col">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {classlist.map((singleclass) => (
+      <div className="container classes">
+        <div className="card mx-auto">
+          <div className="card-header">
+            <h4>Time Table</h4>
+          </div>
+          <div className="card-body">
+            {classlist.length === 0 ? (
+              <p className="text-center text-muted">
+                Currently no classes are scheduled!
+              </p>
+            ) : (
+              <div
+                className="container-fluid"
+                style={{ overflow: "auto", height: "500px" }}
+              >
+                <table className="table table-striped">
+                  <thead className="thead-dark">
                     <tr>
-                      <td>{moment(singleclass.date).format("YYYY-MM-DD")}</td>
-                      <td>{singleclass.sub}</td>
-                      <td>{singleclass.teacher_name}</td>
-                      <td>{singleclass.start_time}</td>
-                      <td>{singleclass.end_time}</td>
-                      <td>
-                        <button
-                          className="btn btn-danger"
-                          onClick={() => handleDelete(singleclass.num)}
-                        >
-                          Cancel
-                        </button>
-                        <button
-                          className="btn btn-success"
-                          onClick={() => openModal(singleclass)}
-                        >
-                          Update
-                        </button>
-                      </td>
+                      <th scope="col">Date</th>
+                      <th scope="col">Subject</th>
+                      <th scope="col">Teacher</th>
+                      <th scope="col">Starts at</th>
+                      <th scope="col">Ends at</th>
+                      <th scope="col">Actions</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
+                  </thead>
+                  <tbody>
+                    {classlist.map((singleclass) => (
+                      <tr>
+                        <td>{moment(singleclass.date).format("YYYY-MM-DD")}</td>
+                        <td>{singleclass.sub}</td>
+                        <td>{singleclass.teacher_name}</td>
+                        <td>{singleclass.start_time}</td>
+                        <td>{singleclass.end_time}</td>
+                        <td>
+                          <button
+                            className="btn btn-danger"
+                            onClick={() => handleDelete(singleclass.num)}
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            className="btn btn-success"
+                            onClick={() => openModal(singleclass)}
+                          >
+                            Update
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
         </div>
       </div>
       {/* modal for update class */}
-      <Modal show={isOpen} onHide={closeModal}>
+      <Modal show={isOpen} onHide={closeModal} className="ml-auto">
         <Modal.Header>
           <Modal.Title>Reschedule Class</Modal.Title>
           <i
@@ -163,7 +168,7 @@ export default function Classes() {
         <Modal.Body>
           <form onSubmit={onUpdateForm} className="container">
             <div className="form-group">
-              <label>Date (dd/mm/yyyy)</label>
+              <label>Date</label>
               <input
                 type="date"
                 className="form-control"
