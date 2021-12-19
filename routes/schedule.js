@@ -56,7 +56,7 @@ router.post('/create',(req,res)=>{
 
 //Get Schedules
 router.get('/getclasses',(req,res)=>{
-    const sqlSearch = "SELECT * FROM schedule"
+    const sqlSearch = "SELECT * FROM schedule order by date asc , start_time asc"
     const search_query = mysql.format(sqlSearch)
     sql.query(search_query,(err,result)=>{
         if (err) {
@@ -68,7 +68,7 @@ router.get('/getclasses',(req,res)=>{
             return  res.status(200).send(result)
           }
          
-          return  res.status(200).send({msg:'No Lecture is found'})
+          return  res.status(200).send()
 })
 })
 
