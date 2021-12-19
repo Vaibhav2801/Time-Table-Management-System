@@ -84,7 +84,7 @@ export default function Classes() {
       .get("/getclasses")
       .then((res) => {
         console.log(res.data);
-        setClasslist(res.data);
+        setClasslist(res.data)
       })
       .catch((err) => {
         console.log(err);
@@ -129,7 +129,8 @@ export default function Classes() {
                   </tr>
                 </thead>
                 <tbody>
-                  {classlist.map((singleclass) => (
+                  {
+                  classlist.map((singleclass) => (
                     <tr>
                       <td>{moment(singleclass.date).format("YYYY-MM-DD")}</td>
                       <td>{singleclass.sub}</td>
