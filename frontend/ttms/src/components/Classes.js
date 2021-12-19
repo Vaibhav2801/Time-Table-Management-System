@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
-
 export default function Classes() {
   const [classlist, setClasslist] = useState([]);
   const [subject, setSubject] = useState("");
@@ -10,10 +9,8 @@ export default function Classes() {
   const [date, setDate] = useState("");
   const [starttime, setStartTime] = useState("");
   const [endtime, setEndTime] = useState("");
-
   const [num, setNum] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-
   const openModal = (singleclass) => {
     setNum(singleclass.num);
     setSubject(singleclass.sub);
@@ -23,7 +20,6 @@ export default function Classes() {
     setIsOpen(true);
   };
   const closeModal = () => setIsOpen(false);
-
   const onChangeSubject = (e) => {
     setSubject(e.target.value);
   };
@@ -39,7 +35,6 @@ export default function Classes() {
   const onChangeEndTime = (e) => {
     setEndTime(e.target.value);
   };
-
   const onUpdateForm = (e) => {
     e.preventDefault();
     if (
@@ -74,23 +69,21 @@ export default function Classes() {
         });
     }
   };
-
   useEffect(() => {
     getclasses();
   }, []);
-
   const getclasses = () => {
     axios
       .get("/getclasses")
       .then((res) => {
         console.log(res.data);
-        setClasslist(res.data)
+        setClasslist(res.data);
+        setClasslist(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
   const handleDelete = (num) => {
     axios
       .delete("/delete/" + num)
@@ -104,7 +97,6 @@ export default function Classes() {
       });
     getclasses();
   };
-
   return (
     <>
       <div className="card container">
@@ -129,8 +121,7 @@ export default function Classes() {
                   </tr>
                 </thead>
                 <tbody>
-                  {
-                  classlist.map((singleclass) => (
+                  {classlist.map((singleclass) => (
                     <tr>
                       <td>{moment(singleclass.date).format("YYYY-MM-DD")}</td>
                       <td>{singleclass.sub}</td>
@@ -159,7 +150,6 @@ export default function Classes() {
           )}
         </div>
       </div>
-
       {/* modal for update class */}
       <Modal show={isOpen} onHide={closeModal}>
         <Modal.Header>

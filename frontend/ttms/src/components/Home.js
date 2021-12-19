@@ -1,64 +1,81 @@
 import React from "react";
+import error from "../images/error.png";
+import savetime from "../images/savetime.png";
+import secure from "../images/secure.png";
 export default function Navbar() {
   return (
-    <>
-      <div className="card container">
+    <div className="home">
+      <div className="card container" style={{ opacity: "93%" }}>
         <div className="card-body">
-          <h5>About TTMS</h5>
-          <section>
+          <h4 className="text-primary mb-3">Introduction</h4>
+          <p>
             Scheduling or maintaining timetable of real-world proportions are
             likely to have considerable complexity. In order to reduce this
             risk, a better and reliable automatic solver without any manual
             intervention is needed. An effective timetable in Educational
             Management System helps educational institutions to create and
             modify timetables seamlessly with less or no manual intervention.
-          </section>
-          <hr />
-          <h5>Advantages of TTMS</h5>
-          <div>
-            <h6>Saves Time</h6>
-            <p>
-              Creating and managing a timetable is a complex task which requires
-              a lot of time and manual paper works. The complex process of
-              timetable creation and management can be automated using an
-              effective Educational Management System with timetable module.
-            </p>
-            <h6>Less error</h6>
-            <p>
-              Paper-based manual timetable system is prone to human errors. A
-              small error in the timetable will disturb the working of the whole
-              institution. By installing an education management system with
-              timetable module, human errors can be reduced significantly.
-            </p>
-            <h6>Customization and flexibility</h6>
-            <p>
-              An effective timetable management system offers high flexibility
-              and customization. It can support any institution irrespective of
-              the size, location or language.
-            </p>
-            <h6>Secure</h6>
-            <p>
-              In Paper-based timetable systems, the data are created and store
-              in the form of paper. This is vulnerable to disasters and
-              accidents. This results in loss of data. Education Management
-              System stores the timetable data digitally; which protects the
-              data from accidents. All the data of the educational management
-              system are stored in highly effective cloud servers, which will
-              prevent the theft of digital data.
-            </p>
-            <h6>User-friendly</h6>
-            <p>
-              Anybody without technical knowledge can use this software
-              seamlessly.
-            </p>
+          </p>
+          <h4 className="text-primary">Advantages</h4>
+          <div className="card-group">
+            <div className="card">
+              <img
+                className="card-img-top"
+                src={savetime}
+                alt="save time image"
+                style={{ height: "21rem", width: "85%" }}
+              />
+              <div className="card-body">
+                <h5 className="card-title">Saves Time</h5>
+                <hr />
+                <p className="card-text">
+                  Creating and managing a timetable is a complex task which
+                  requires a lot of time and manual paper works. The complex
+                  process of timetable creation and management can be automated
+                  using an effective Time Table Management System.
+                </p>
+              </div>
+            </div>
+            <div className="card">
+              <img
+                className="card-img-top"
+                src={error}
+                alt="error image"
+                style={{ height: "21rem", width: "101%" }}
+              />
+              <div className="card-body">
+                <h5 className="card-title">Less error</h5>
+                <hr />
+                <p className="card-text">
+                  Paper-based manual timetable system is prone to human errors.
+                  A small error in the timetable will disturb the working of the
+                  whole institution. By installing a Time Table management
+                  system, human errors can be reduced significantly.
+                </p>
+              </div>
+            </div>
+            <div className="card">
+              <img
+                className="card-img-top"
+                src={secure}
+                alt="secure image"
+                style={{ height: "21rem", width: "100%" }}
+              />
+              <div className="card-body">
+                <h5 className="card-title">Secure</h5>
+                <hr />
+                <p className="card-text">
+                  In Paper-based timetable systems, the data are created and
+                  store in the form of paper. This is vulnerable to disasters
+                  and accidents which can cause data loss. A Time Table
+                  Management System stores the timetable data digitally; which
+                  protects the data from accidents.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      {/* <footer className="bg-light text-center">
-        <div className="text-center p-3">
-          <b>© 2021 Copyright, Developed by Group-9</b>
-        </div>
-      </footer> */}
-    </>
+    </div>
   );
 }
