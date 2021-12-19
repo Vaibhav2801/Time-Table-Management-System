@@ -58,19 +58,23 @@ export default function ScheduleClass() {
   };
   return (
     <>
-      <div className="container">
-        <div className="card">
+      <div className="container schedule">
+        <div className="card mx-auto">
           <div className="card-header">
-            <b>Schedule a Class</b>
+            <h4>Schedule Class</h4>
           </div>
           <div className="card-body">
+            <small className="text-muted ms-2">
+              Please fill all the details to schedule a class.
+            </small>
+            <br />
             <form
-             // autocomplete="off"
+              // autocomplete="off"
               onSubmit={onSubmitForm}
               className="container"
             >
               <div className="form-group">
-                <label>Date (dd/mm/yyyy)</label>
+                <label>Date</label>
                 <input
                   type="date"
                   className="form-control"
@@ -97,36 +101,45 @@ export default function ScheduleClass() {
                   type="text"
                   className="form-control"
                   id="addsubject"
-                  placeholder="Enter Subject"
+                  placeholder="Enter Subject's Name"
                   value={subject}
                   onChange={onChangeSubject}
                 />
               </div>
-              <div className="form-group">
-                <label>Start Time</label>
-                <input
-                  type="time"
-                  className="form-control"
-                  id="addstarttime"
-                  placeholder="Start Time"
-                  value={starttime}
-                  onChange={onChangeStartTime}
-                />
+              <div className="row">
+                <div className="col">
+                  {" "}
+                  <div className="form-group">
+                    <label>Start Time</label>
+                    <input
+                      type="time"
+                      className="form-control"
+                      id="addstarttime"
+                      placeholder="Start Time"
+                      value={starttime}
+                      onChange={onChangeStartTime}
+                    />
+                  </div>
+                </div>
+                <div className="col">
+                  <div className="form-group">
+                    <label>End Time</label>
+                    <input
+                      type="time"
+                      className="form-control"
+                      id="addendtime"
+                      placeholder="End Time"
+                      value={endtime}
+                      onChange={onChangeEndTime}
+                    />
+                  </div>
+                </div>
               </div>
-              <div className="form-group">
-                <label>End Time</label>
-                <input
-                  type="time"
-                  className="form-control"
-                  id="addendtime"
-                  placeholder="End Time"
-                  value={endtime}
-                  onChange={onChangeEndTime}
-                />
+              <div className="submitschedule">
+                <button type="submit" className="btn btn-primary btn-md hover">
+                  Submit
+                </button>
               </div>
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
             </form>
           </div>
         </div>

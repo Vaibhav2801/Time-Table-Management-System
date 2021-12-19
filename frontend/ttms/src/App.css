@@ -24,10 +24,6 @@ table {
 .btn {
   border-radius: 16px;
   cursor: pointer;
-  font-size: small;
-}
-.classlist {
-  overflow-x: auto;
 }
 .center {
   margin-left: auto;
@@ -38,4 +34,42 @@ table {
 }
 .profile button {
   margin-top: 15px;
+}
+.schedule .card {
+  height: 100%;
+  width: 80%;
+  border: none;
+}
+.schedule .card-header {
+  background-color: #cc5500;
+}
+.schedule .card-header h4 {
+  text-align: center;
+  color: white;
+}
+.schedule label {
+  margin-top: 10px;
+}
+.submitschedule {
+  margin-top: 20px;
+  position: relative;
+  top: 100%;
+}
+.submitschedule :hover {
+  background-color: #cc5500;
+}
+.classes table {
+  overflow-x: auto;
+}
+.classes .card {
+  height: 100%;
+  width: 80%;
+  border: none;
+}
+.classes .card-header {
+  background-color: #cc5500;
+}
+.classes .card-header h4 {
+  text-align: center;
+  color: white;
 }
