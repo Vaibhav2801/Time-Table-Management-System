@@ -1,4 +1,5 @@
 import React from "react";
+import bg from "../images/bg-ttms.jpg";
 export default function Body() {
   return (
     <div
@@ -12,7 +13,7 @@ export default function Body() {
       }}
     >
       <img
-        src="bg-ttms.jpg"
+        src={bg}
         style={{
           position: "inherit",
           // opacity: "0.9",
