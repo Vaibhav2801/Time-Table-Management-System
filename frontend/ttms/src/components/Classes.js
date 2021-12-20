@@ -230,7 +230,7 @@ export default function Classes() {
                 className="btn btn-sm btn-secondary"
                 onClick={closeModal}
               >
-                Cancel
+                Close
               </button>
               <button
                 type="submit"

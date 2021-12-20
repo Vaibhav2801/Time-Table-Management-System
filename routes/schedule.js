@@ -80,7 +80,6 @@ router.delete('/delete/:num',(req,res)=>{
   sql.query(search_query,(err,result)=>{
     if (err) {
       if (err.kind === "not_found")   res.status(404).send({message: `Not found Lecture with id ${req.params.num}.`});
-
       else   res.status(500).send({message: "Could not delete Lecture with id " + req.params.num});
     } 
     else res.send({ message: `Lecture was deleted successfully!` });
@@ -104,15 +103,15 @@ router.put('/update/:num',(req,res)=>{
   }
   if (res.affectedRows == 0)   return   res.status(200).send({msg:'No Lecture is found'})
     
-  sql.query('SELECT * FROM schedule WHERE num=?',req.params.num,(err,result)=>{
-    if (err) {
-      console.log("error: ", err);
-     return    res.status(400).send({msg:err})
-    }
-    if (result.length == 0)   return   res.status(200).send({msg:'No Lecture is found'})
+  // sql.query('SELECT * FROM schedule WHERE num=?',req.params.num,(err,result)=>{
+  //   if (err) {
+  //     console.log("error: ", err);
+  //    return    res.status(400).send({msg:err})
+  //   }
+  //   if (result.length == 0)   return   res.status(200).send({msg:'No Lecture is found'})
 
-     return   res.send({sched:result})
-  })
+  //    return   res.send({sched:result})
+  // })
  }
  )
   

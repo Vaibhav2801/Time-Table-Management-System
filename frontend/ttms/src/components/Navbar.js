@@ -88,7 +88,7 @@ export default function Navbar() {
               className="btn btn-sm btn-secondary"
               onClick={handleClose}
             >
-              Cancel
+              Close 
             </button>
           </div>
         </Modal.Body>
