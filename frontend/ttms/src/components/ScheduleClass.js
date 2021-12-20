@@ -33,21 +33,27 @@ export default function ScheduleClass() {
       starttime === "" ||
       endtime === ""
     ) {
-      alert("Please fill  all the details");
-    } else {
+      alert("Please fill all the details");
+    }
+    if(!localStorage.getItem("loginData")){
+      alert("Please login to continue");
+    }
+     else {
       axios
         .post("/create", {
-          date: date,
+          data:{date: date,
           sub: subject,
           teacher_name: teacher,
           start_time: starttime,
           end_time: endtime,
+          },
+          logindata:localStorage.getItem("loginData")
         })
         .then((res) => {
           alert("Class Scheduled");
         })
         .catch((err) => {
-          console.log(err);
+          alert("Class can't be scheduled");
         });
     }
     setDate("");
@@ -56,6 +62,7 @@ export default function ScheduleClass() {
     setStartTime("");
     setEndTime("");
   };
+  
   return (
     <>
       <div className="container schedule">

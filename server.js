@@ -38,6 +38,7 @@ function upsert(array,item){
 
 
 app.post('/api/google-login',async (req,res)=>{
+  console.log(req.body)
   const {token}=req.body
   const ticket = await client.verifyIdToken({
     idToken:token,
@@ -47,8 +48,8 @@ const {name,email,picture}=ticket.getPayload()
 upsert(user,{name,email,picture})
 res.status(201)
 res.json({name,email,picture})
-
 })
+
 
 
 const port = process.env.PORT || 4000;

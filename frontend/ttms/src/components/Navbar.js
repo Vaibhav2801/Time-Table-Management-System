@@ -15,10 +15,10 @@ export default function Navbar() {
   const [show, setShow] = useState(false);
   // sign in functions
   const handleFailure = (res) => {
-    alert(res);
+    alert("Not a Valid User");
   };
+
   const handleLogin = async (googleData) => {
-    console.log(googleData);
     const res = await fetch("/api/google-login", {
       method: "POST",
       body: JSON.stringify({
@@ -35,6 +35,7 @@ export default function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem("loginData");
     setLoginData(null);
+    window.location.href = '/home';
   };
   // modal functions
   const handleClose = () => setShow(false);
@@ -74,10 +75,20 @@ export default function Navbar() {
                   <i className="fa fa-fw fa-clock-o"></i>Classes
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" onClick={handleShow} to="/profile">
-                  <i className="fa fa-fw fa-user"></i>Profile
-                </Link>
+              <li className="nav-item">{
+                loginData?(<Link className="nav-link" onClick={handleShow} to="/profile" disabled={loginData?false:true}>
+                <i className="fa fa-fw fa-user"></i>Profile
+              </Link>): (<GoogleLogin
+                // clientId="1017366883273-4j5q51kqd0sh1nc95bpbs5dh983f6el3.apps.googleusercontent.com"
+                clientId="1017366883273-5sgedv79fup85tjh2aul5fqvh2shlj0v.apps.googleusercontent.com"
+                buttonText="Login"
+                onSuccess={handleLogin}
+                onFailure={handleFailure}
+                className="bg-primary text-light"
+                cookiePolicy={"single_host_origin"}
+              />)
+              }
+                
               </li>
             </ul>
           </div>
@@ -89,8 +100,7 @@ export default function Navbar() {
           <h5 style={{ color: "white" }}>Profile</h5>
         </Modal.Header>
         <Modal.Body>
-          {loginData ? (
-            <div className="profile">
+          {loginData ? (<div className="profile">
               <div className="user">
                 <img src={usericon} alt="user"></img>
               </div>
@@ -119,19 +129,7 @@ export default function Navbar() {
               >
                 Close
               </button>
-            </div>
-          ) : (
-            <div>
-              <p className="text-muted">Please Log in to continue.</p>
-              <GoogleLogin
-                clientId="1017366883273-4j5q51kqd0sh1nc95bpbs5dh983f6el3.apps.googleusercontent.com"
-                buttonText="Login with Google"
-                onSuccess={handleLogin}
-                onFailure={handleFailure}
-                cookiePolicy={"single_host_origin"}
-              />
-            </div>
-          )}
+            </div>): (<p>Please Login to view profile!</p>)}
         </Modal.Body>
       </Modal>
     </>

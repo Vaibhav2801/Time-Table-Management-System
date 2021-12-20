@@ -5,12 +5,15 @@ const mysql=require('mysql2')
 const auth2=require('../middleware/auth2')
 
 router.post('/create',(req,res)=>{
-  console.log(1)
-     const sub=req.body.sub
-     const teacher_name=req.body.teacher_name
-     const date=req.body.date
-     const start_time=req.body.start_time
-     const end_time=req.body.end_time
+     if(!req.body.logindata){
+       return res.status(401).send({msg:"Unauthorised"})
+     }
+     else{
+     const sub=req.body.data.sub
+     const teacher_name=req.body.data.teacher_name
+     const date=req.body.data.date
+     const start_time=req.body.data.start_time
+     const end_time=req.body.data.end_time
 
       sql.query("SELECT * FROM schedule WHERE (start_time<= ? and end_time>? ) or (start_time< ? and end_time>=?)",
       [start_time,start_time,end_time,end_time],
@@ -34,7 +37,7 @@ router.post('/create',(req,res)=>{
          })
         }
       })
-})
+}})
 
  //Get Schedule of given branch
 // router.get('/:branch',(req,res)=>{

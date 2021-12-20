@@ -3,6 +3,7 @@ import moment from "moment";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
 export default function Classes() {
+  const [isLoggedIn, setIsLoggedIn]   =  useState(localStorage.getItem("loginData")? true: false)
   const [classlist, setClasslist] = useState([]);
   const [subject, setSubject] = useState("");
   const [teacher, setTeacher] = useState("");
@@ -72,6 +73,15 @@ export default function Classes() {
   useEffect(() => {
     getclasses();
   }, []);
+  useEffect(()=> {
+if(localStorage.getItem("loginData")){
+  setIsLoggedIn(true);
+
+}
+else{
+  setIsLoggedIn(false);
+}
+  },[localStorage.getItem("loginData")]);
   const getclasses = () => {
     axios
       .get("/getclasses")
@@ -136,12 +146,14 @@ export default function Classes() {
                           <button
                             className="btn btn-sm btn-danger ms-2"
                             onClick={() => handleDelete(singleclass.num)}
+                            disabled={!isLoggedIn}
                           >
                             Cancel
                           </button>
                           <button
                             className="btn btn-sm btn-success ms-2"
                             onClick={() => openModal(singleclass)}
+                            disabled={!isLoggedIn}
                           >
                             Update
                           </button>
