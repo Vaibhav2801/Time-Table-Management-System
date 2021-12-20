@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import GoogleLogin from "react-google-login";
+import usericon from "../images/usericon.png";
 
 export default function Navbar() {
   // states for login
@@ -17,7 +18,7 @@ export default function Navbar() {
     alert(res);
   };
   const handleLogin = async (googleData) => {
-    // console.log(googleData);
+    console.log(googleData);
     const res = await fetch("/api/google-login", {
       method: "POST",
       body: JSON.stringify({
@@ -75,7 +76,7 @@ export default function Navbar() {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" onClick={handleShow} to="/profile">
-                  <i className="fa fa-fw fa-sign-in"></i>Log In
+                  <i className="fa fa-fw fa-user"></i>Profile
                 </Link>
               </li>
             </ul>
@@ -85,13 +86,13 @@ export default function Navbar() {
       {/* profile modal */}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header style={{ backgroundColor: "#cc5500" }}>
-          <h5 style={{ color: "white" }}>Login</h5>
+          <h5 style={{ color: "white" }}>Profile</h5>
         </Modal.Header>
         <Modal.Body>
           {loginData ? (
             <div className="profile">
               <div className="user">
-                <img src={loginData.imageUrl} alt="user"></img>
+                <img src={usericon} alt="user"></img>
               </div>
               <div className="text-center">
                 <p>

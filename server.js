@@ -37,14 +37,14 @@ function upsert(array,item){
 }
 
 
-app.post('api/google-login',async (req,res)=>{
+app.post('/api/google-login',async (req,res)=>{
   const {token}=req.body
   const ticket = await client.verifyIdToken({
     idToken:token,
     audience:process.env.clientId
   })
 const {name,email,picture}=ticket.getPayload()
-upsert(users,{name,email,picture})
+upsert(user,{name,email,picture})
 res.status(201)
 res.json({name,email,picture})
 
