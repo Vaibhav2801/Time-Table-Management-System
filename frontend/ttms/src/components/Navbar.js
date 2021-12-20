@@ -1,10 +1,41 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import usericon from "../images/usericon.png";
-export default function Navbar() {
-  const [show, setShow] = useState(false);
+import GoogleLogin from "react-google-login";
 
+export default function Navbar() {
+  // states for login
+  const [loginData, setLoginData] = useState(
+    localStorage.getItem("loginData")
+      ? JSON.parse(localStorage.getItem("loginData"))
+      : null
+  );
+  // states for modal
+  const [show, setShow] = useState(false);
+  // sign in functions
+  const handleFailure = (res) => {
+    alert(res);
+  };
+  const handleLogin = async (googleData) => {
+    // console.log(googleData);
+    const res = await fetch("/api/google-login", {
+      method: "POST",
+      body: JSON.stringify({
+        token: googleData.tokenId,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    setLoginData(data);
+    localStorage.setItem("loginData", JSON.stringify(data));
+  };
+  const handleLogout = () => {
+    localStorage.removeItem("loginData");
+    setLoginData(null);
+  };
+  // modal functions
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
@@ -44,7 +75,7 @@ export default function Navbar() {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" onClick={handleShow} to="/profile">
-                  <i className="fa fa-fw fa-user"></i>Profile
+                  <i className="fa fa-fw fa-sign-in"></i>Log In
                 </Link>
               </li>
             </ul>
@@ -54,43 +85,52 @@ export default function Navbar() {
       {/* profile modal */}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header style={{ backgroundColor: "#cc5500" }}>
-          <h5 style={{ color: "white" }}>Profile</h5>
+          <h5 style={{ color: "white" }}>Login</h5>
         </Modal.Header>
         <Modal.Body>
-          <div className="profile">
-            <div className="user">
-              <img src={usericon} alt="user"></img>
+          {loginData ? (
+            <div className="profile">
+              <div className="user">
+                <img src={loginData.imageUrl} alt="user"></img>
+              </div>
+              <div className="text-center">
+                <p>
+                  <b>Name : </b>
+                  {loginData.name}
+                </p>
+                <p>
+                  <b>Email: </b>
+                  {loginData.email}
+                </p>
+              </div>
+              <button
+                type="button"
+                className="btn btn-sm btn-danger"
+                style={{ float: "right" }}
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+              <button
+                type="button"
+                className="btn btn-sm btn-secondary"
+                onClick={handleClose}
+              >
+                Close
+              </button>
             </div>
-            <div className="text-center">
-              <p>
-                <b>Name : </b>XYZ
-              </p>
-              <p>
-                <b>Email: </b>xyz@xyz.com
-              </p>
-              <p>
-                <b>Branch: </b>Information Technology
-              </p>
-              <p>
-                <b>Designation:</b> Teacher
-              </p>
+          ) : (
+            <div>
+              <p className="text-muted">Please Log in to continue.</p>
+              <GoogleLogin
+                clientId="1017366883273-4j5q51kqd0sh1nc95bpbs5dh983f6el3.apps.googleusercontent.com"
+                buttonText="Login with Google"
+                onSuccess={handleLogin}
+                onFailure={handleFailure}
+                cookiePolicy={"single_host_origin"}
+              />
             </div>
-            <button
-              type="button"
-              className="btn btn-sm btn-danger"
-              style={{ float: "right" }}
-              onClick={handleClose}
-            >
-              Logout
-            </button>
-            <button
-              type="button"
-              className="btn btn-sm btn-secondary"
-              onClick={handleClose}
-            >
-              Close 
-            </button>
-          </div>
+          )}
         </Modal.Body>
       </Modal>
     </>
