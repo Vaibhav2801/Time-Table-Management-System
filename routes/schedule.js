@@ -2,7 +2,7 @@ const express=require('express')
 const router=express.Router()
 const sql=require('../db.js')
 const mysql=require('mysql2')
-const auth2=require('../middleware/auth2')
+
 
 router.post('/create',(req,res)=>{
      if(!req.body.logindata){
@@ -38,23 +38,6 @@ router.post('/create',(req,res)=>{
         }
       })
 }})
-
- //Get Schedule of given branch
-// router.get('/:branch',(req,res)=>{
-//     const sqlSearch = "SELECT * FROM schedule WHERE branch= ?"
-//     const search_query = mysql.format(sqlSearch,[req.params.branch])
-//     sql.query(search_query,(err,result)=>{
-//         if (err) {
-//             console.log("error: ", err);
-//             return  res.status(400).send({msg:err})
-//           }
-//           if (result.length) {
-//             return  res.status(400).send({lectures:result})
-//           }
-          
-//           return  res.status(400).send({msg:'No Lecture is Scheduled'})
-// })
-// })
 
 //Get Schedules
 router.get('/getclasses',(req,res)=>{
