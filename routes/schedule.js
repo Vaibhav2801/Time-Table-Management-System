@@ -3,7 +3,7 @@ const router=express.Router()
 const sql=require('../db.js')
 const mysql=require('mysql2')
 
-
+//Create a Schedule
 router.post('/create',(req,res)=>{
      if(!req.body.logindata){
        return res.status(401).send({msg:"Unauthorised"})
@@ -19,22 +19,28 @@ router.post('/create',(req,res)=>{
       [start_time,start_time,end_time,end_time],
       (err,result)=>{
          if (err) throw (err)
-         console.log("------> Search Results")
-         console.log(result.length)
          if (result.length != 0) {
           console.log("Lecture is already scheduled at that time")
           res.status(404).send({msg:'Lecture is already scheduled at that time'}) 
          } 
          else {
-         sql.query ("INSERT INTO schedule (sub,teacher_name,start_time,end_time,date) VALUES (?,?,?,?,?)",
-         [sub,teacher_name,start_time,end_time,date], 
-         (err, result)=> {
-          if (err) throw (err)
-          console.log ("--------> Lecture Scheduled")
-          console.log(result.num)
-          res.sendStatus(201)
-
-         })
+           sql.query("SELECT * FROM TEACHER WHERE name=?",[teacher_name],(err,result)=>{
+            if (err) throw (err)
+            if (result.length == 0) {
+             console.log("You can't schedule a lecture")
+             res.status(404).send({msg:"You can't Schedule a lecture"}) 
+            } 
+            else {
+              sql.query ("INSERT INTO schedule (sub,teacher_name,start_time,end_time,date) VALUES (?,?,?,?,?)",
+              [sub,teacher_name,start_time,end_time,date], 
+              (err, result)=> {
+               if (err) throw (err)
+               console.log ("Lecture Scheduled")
+               res.sendStatus(201)
+              })
+            }
+           })
+        
         }
       })
 }})
@@ -74,7 +80,6 @@ router.put('/update/:num',(req,res)=>{
   const date=req.body.date
   const start_time=req.body.start_time
   const end_time=req.body.end_time
-  const sched=req.body
  sql.query("UPDATE schedule SET sub=?,teacher_name=?,start_time=?,end_time=?,date=? WHERE num=?",
  [sub,teacher_name,start_time,end_time,date,req.params.num],
  (err,result)=>{
