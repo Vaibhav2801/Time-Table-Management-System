@@ -80,7 +80,7 @@ export default function Navbar() {
                 <i className="fa fa-fw fa-user"></i>Profile
               </Link>): (<GoogleLogin
                 // clientId="1017366883273-4j5q51kqd0sh1nc95bpbs5dh983f6el3.apps.googleusercontent.com"
-                clientId="1017366883273-5sgedv79fup85tjh2aul5fqvh2shlj0v.apps.googleusercontent.com"
+                clientId="127054622010-tk2511o77dpkda236fbp8h240ir22f6q.apps.googleusercontent.com"
                 buttonText="Login"
                 onSuccess={handleLogin}
                 onFailure={handleFailure}
