@@ -3,7 +3,9 @@ import moment from "moment";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
 export default function Classes() {
-  const [isLoggedIn, setIsLoggedIn]   =  useState(localStorage.getItem("loginData")? true: false)
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("loginData") ? true : false
+  );
   const [classlist, setClasslist] = useState([]);
   const [subject, setSubject] = useState("");
   const [teacher, setTeacher] = useState("");
@@ -73,15 +75,13 @@ export default function Classes() {
   useEffect(() => {
     getclasses();
   }, []);
-  useEffect(()=> {
-if(localStorage.getItem("loginData")){
-  setIsLoggedIn(true);
-
-}
-else{
-  setIsLoggedIn(false);
-}
-  },[localStorage.getItem("loginData")]);
+  useEffect(() => {
+    if (localStorage.getItem("loginData")) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [localStorage.getItem("loginData")]);
   const getclasses = () => {
     axios
       .get("/getclasses")
@@ -132,6 +132,7 @@ else{
                       <th scope="col">Starts at</th>
                       <th scope="col">Ends at</th>
                       <th scope="col">Actions</th>
+                      <th scope="col">Admin</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -158,6 +159,7 @@ else{
                             Update
                           </button>
                         </td>
+                        <td>{loginData.name}</td>
                       </tr>
                     ))}
                   </tbody>
