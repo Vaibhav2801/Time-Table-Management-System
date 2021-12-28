@@ -3,6 +3,12 @@ import moment from "moment";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
 export default function Classes() {
+  const [loginData, setLoginData] = useState(
+    localStorage.getItem("loginData")
+      ? JSON.parse(localStorage.getItem("loginData"))
+      : null
+  );
+
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("loginData") ? true : false
   );
@@ -131,8 +137,8 @@ export default function Classes() {
                       <th scope="col">Teacher</th>
                       <th scope="col">Starts at</th>
                       <th scope="col">Ends at</th>
-                      <th scope="col">Actions</th>
                       <th scope="col">Admin</th>
+                      <th scope="col">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -143,6 +149,7 @@ export default function Classes() {
                         <td>{singleclass.teacher_name}</td>
                         <td>{singleclass.start_time}</td>
                         <td>{singleclass.end_time}</td>
+                        {loginData? (<td>{loginData.email}</td>):(<td>Admin Not Found</td>)}
                         <td>
                           <button
                             className="btn btn-sm btn-danger ms-2"
@@ -159,7 +166,7 @@ export default function Classes() {
                             Update
                           </button>
                         </td>
-                        <td>{loginData.name}</td>
+                        
                       </tr>
                     ))}
                   </tbody>

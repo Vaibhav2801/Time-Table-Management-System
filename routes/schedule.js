@@ -14,6 +14,7 @@ router.post('/create',(req,res)=>{
      const date=req.body.data.date
      const start_time=req.body.data.start_time
      const end_time=req.body.data.end_time
+    
 
       sql.query("SELECT * FROM schedule WHERE (start_time<= ? and end_time>? ) or (start_time< ? and end_time>=?)",
       [start_time,start_time,end_time,end_time],
